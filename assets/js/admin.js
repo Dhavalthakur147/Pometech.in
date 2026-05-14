@@ -7,6 +7,29 @@ const forgotButton = document.querySelector("[data-forgot]");
 const dashboardPage = document.body.classList.contains("dashboard-page");
 const loader = document.querySelector("[data-loader]");
 
+const getAuthToken = () => localStorage.getItem(authKey);
+const getAuthHeaders = () => ({
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${getAuthToken()}`
+});
+
+async function apiRequest(path, options = {}) {
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...options,
+    headers: {
+      ...(options.headers || {}),
+      ...(getAuthToken() ? getAuthHeaders() : { "Content-Type": "application/json" })
+    }
+  });
+  const result = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    throw new Error(result.message || "Backend request failed.");
+  }
+
+  return result;
+}
+
 if (loginForm) {
   if (localStorage.getItem(authKey)) {
     window.location.href = "admin-dashboard.html";
@@ -94,8 +117,10 @@ if (dashboardPage && !localStorage.getItem(authKey)) {
   window.location.href = "admin-login.html";
 }
 
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
   setTimeout(() => loader?.classList.add("hidden"), 450);
+  loadAdminProfile();
+  if (dashboardPage) await loadDashboardOverview();
   drawCharts();
   animateCounters();
 });
@@ -175,15 +200,50 @@ function animateCounters() {
     const increment = Math.max(1, Math.ceil(target / 48));
     const timer = setInterval(() => {
       current = Math.min(target, current + increment);
-      item.textContent = formatMetric(current, item.dataset.counter);
+      item.textContent = formatMetric(current, item);
       if (current >= target) clearInterval(timer);
     }, 24);
   });
 }
 
-function formatMetric(value, raw) {
-  if (Number(raw) >= 1000) return `₹${Math.round(value / 1000)}K`;
-  if (raw === "32") return `${value}%`;
+function loadAdminProfile() {
+  const admin = JSON.parse(localStorage.getItem(adminKey) || "null");
+  const adminName = document.querySelector("[data-admin-name]");
+  const adminEmail = document.querySelector("[data-admin-email]");
+
+  if (adminName && admin?.name) adminName.textContent = admin.name;
+  if (adminEmail && admin?.email) adminEmail.textContent = admin.email;
+}
+
+async function loadDashboardOverview() {
+  try {
+    const { data } = await apiRequest("/dashboard/overview");
+
+    document.querySelectorAll("[data-metric]").forEach((item) => {
+      const value = Number(data[item.dataset.metric] || 0);
+      item.dataset.counter = String(value);
+      item.textContent = "0";
+    });
+
+    const recentActivities = document.querySelector("[data-recent-activities]");
+    if (recentActivities && Array.isArray(data.recentActivities)) {
+      recentActivities.replaceChildren(...data.recentActivities.map((activity) => {
+        const item = document.createElement("li");
+        item.textContent = activity;
+        return item;
+      }));
+    }
+  } catch (error) {
+    if (error.message.toLowerCase().includes("token") || error.message.toLowerCase().includes("auth")) {
+      localStorage.removeItem(authKey);
+      window.location.href = "admin-login.html";
+    }
+  }
+}
+
+function formatMetric(value, item) {
+  if (item.dataset.format === "currency") return `Rs ${Math.round(value / 1000)}K`;
+  if (item.dataset.format === "percent") return `${value}%`;
   return value;
 }
 

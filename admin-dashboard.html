@@ -42,7 +42,7 @@
       <label class="admin-search">Search<input type="search" placeholder="Search dashboard..." data-global-search></label>
       <button class="icon-button" type="button" aria-label="Notifications">●<span>3</span></button>
       <button class="theme-toggle" type="button" data-theme-toggle>Light</button>
-      <div class="admin-profile"><span>PT</span><div><strong>Admin</strong><small>admin@pomotech.in</small></div></div>
+      <div class="admin-profile"><span>PT</span><div><strong data-admin-name>Admin</strong><small data-admin-email>admin@pomotech.in</small></div></div>
     </header>
 
     <main class="admin-content">
@@ -52,18 +52,18 @@
           <a class="admin-btn primary" href="index.html">View Website</a>
         </div>
         <div class="metric-grid">
-          <article class="metric-card"><span>TC</span><small>Total Clients</small><strong data-counter="50">0</strong></article>
-          <article class="metric-card"><span>AP</span><small>Active Projects</small><strong data-counter="14">0</strong></article>
-          <article class="metric-card"><span>CP</span><small>Completed Projects</small><strong data-counter="86">0</strong></article>
-          <article class="metric-card"><span>PO</span><small>Pending Orders</small><strong data-counter="8">0</strong></article>
-          <article class="metric-card"><span>TR</span><small>Total Revenue</small><strong data-counter="425000">0</strong></article>
-          <article class="metric-card"><span>MG</span><small>Monthly Growth</small><strong data-counter="32">0</strong></article>
+          <article class="metric-card"><span>TC</span><small>Total Clients</small><strong data-counter="50" data-metric="totalClients">0</strong></article>
+          <article class="metric-card"><span>TO</span><small>Total Orders</small><strong data-counter="14" data-metric="totalOrders">0</strong></article>
+          <article class="metric-card"><span>TM</span><small>Total Messages</small><strong data-counter="86" data-metric="totalMessages">0</strong></article>
+          <article class="metric-card"><span>PP</span><small>Pending Payments</small><strong data-counter="8" data-metric="pendingPayments" data-format="currency">0</strong></article>
+          <article class="metric-card"><span>TR</span><small>Total Revenue</small><strong data-counter="425000" data-metric="totalRevenue" data-format="currency">0</strong></article>
+          <article class="metric-card"><span>MG</span><small>Monthly Growth</small><strong data-counter="32" data-metric="monthlyGrowth" data-format="percent">0</strong></article>
         </div>
         <div class="dashboard-grid">
           <article class="admin-card chart-card"><div class="card-head"><h2>Revenue Trend</h2><small>Line chart</small></div><canvas width="620" height="260" data-line-chart></canvas></article>
           <article class="admin-card chart-card"><div class="card-head"><h2>Service Split</h2><small>Pie chart</small></div><canvas width="320" height="260" data-pie-chart></canvas></article>
           <article class="admin-card analytics-card"><h2>Business Analytics</h2><div class="progress-row"><span>Website Projects</span><b style="--value:78%"></b></div><div class="progress-row"><span>Design Orders</span><b style="--value:64%"></b></div><div class="progress-row"><span>Automation Leads</span><b style="--value:48%"></b></div></article>
-          <article class="admin-card activity-card"><h2>Recent Activity</h2><ul><li>New website enquiry from Jaipur Retail</li><li>Invoice generated for logo package</li><li>Portfolio image uploaded in Social Media Posts</li><li>Payment marked received for dashboard project</li></ul></article>
+          <article class="admin-card activity-card"><h2>Recent Activity</h2><ul data-recent-activities><li>New website enquiry from Jaipur Retail</li><li>Invoice generated for logo package</li><li>Portfolio image uploaded in Social Media Posts</li><li>Payment marked received for dashboard project</li></ul></article>
         </div>
       </section>
 
