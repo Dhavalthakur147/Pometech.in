@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Pomegranate Technology admin dashboard for clients, services, portfolio, orders, payments, messages, analytics, and settings.">
+  <title>Admin Dashboard | Pomegranate Technology</title>
+  <link rel="icon" href="image/logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="dashboard-page" data-theme="dark">
+  <div class="loading-screen" data-loader><span></span><p>Loading admin panel</p></div>
+
+  <aside class="admin-sidebar" data-sidebar>
+    <a class="admin-brand" href="admin-dashboard.html">
+      <img decoding="async" src="image/logo.jpeg" alt="Pomegranate Technology logo">
+      <span>Pomegranate Admin</span>
+    </a>
+    <nav class="admin-menu" aria-label="Admin menu">
+      <button class="active" data-section-target="dashboard">Dashboard</button>
+      <button data-section-target="users">Users</button>
+      <button data-section-target="services">Services</button>
+      <button data-section-target="portfolio">Portfolio</button>
+      <button data-section-target="orders">Orders</button>
+      <button data-section-target="clients">Clients</button>
+      <button data-section-target="payments">Payments</button>
+      <button data-section-target="messages">Messages</button>
+      <button data-section-target="analytics">Analytics</button>
+      <button data-section-target="settings">Settings</button>
+      <button data-logout>Logout</button>
+    </nav>
+  </aside>
+
+  <div class="admin-app">
+    <header class="admin-topbar">
+      <button class="menu-toggle" type="button" data-sidebar-toggle aria-label="Toggle sidebar">☰</button>
+      <label class="admin-search">Search<input type="search" placeholder="Search dashboard..." data-global-search></label>
+      <button class="icon-button" type="button" aria-label="Notifications">●<span>3</span></button>
+      <button class="theme-toggle" type="button" data-theme-toggle>Light</button>
+      <div class="admin-profile"><span>PT</span><div><strong>Admin</strong><small>admin@pomotech.in</small></div></div>
+    </header>
+
+    <main class="admin-content">
+      <section class="admin-section active" id="dashboard" data-section>
+        <div class="section-title">
+          <div><p class="eyebrow">Dashboard Overview</p><h1>Business Control Center</h1></div>
+          <a class="admin-btn primary" href="index.html">View Website</a>
+        </div>
+        <div class="metric-grid">
+          <article class="metric-card"><span>TC</span><small>Total Clients</small><strong data-counter="50">0</strong></article>
+          <article class="metric-card"><span>AP</span><small>Active Projects</small><strong data-counter="14">0</strong></article>
+          <article class="metric-card"><span>CP</span><small>Completed Projects</small><strong data-counter="86">0</strong></article>
+          <article class="metric-card"><span>PO</span><small>Pending Orders</small><strong data-counter="8">0</strong></article>
+          <article class="metric-card"><span>TR</span><small>Total Revenue</small><strong data-counter="425000">0</strong></article>
+          <article class="metric-card"><span>MG</span><small>Monthly Growth</small><strong data-counter="32">0</strong></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="admin-card chart-card"><div class="card-head"><h2>Revenue Trend</h2><small>Line chart</small></div><canvas width="620" height="260" data-line-chart></canvas></article>
+          <article class="admin-card chart-card"><div class="card-head"><h2>Service Split</h2><small>Pie chart</small></div><canvas width="320" height="260" data-pie-chart></canvas></article>
+          <article class="admin-card analytics-card"><h2>Business Analytics</h2><div class="progress-row"><span>Website Projects</span><b style="--value:78%"></b></div><div class="progress-row"><span>Design Orders</span><b style="--value:64%"></b></div><div class="progress-row"><span>Automation Leads</span><b style="--value:48%"></b></div></article>
+          <article class="admin-card activity-card"><h2>Recent Activity</h2><ul><li>New website enquiry from Jaipur Retail</li><li>Invoice generated for logo package</li><li>Portfolio image uploaded in Social Media Posts</li><li>Payment marked received for dashboard project</li></ul></article>
+        </div>
+      </section>
+
+      <section class="admin-section" id="users" data-section>
+        <div class="section-title"><div><p class="eyebrow">User Management</p><h1>Manage Users</h1></div><button class="admin-btn primary" data-action="Add User">Add User</button></div>
+        <div class="toolbar"><input type="search" aria-label="Search User" placeholder="Search User..." data-table-search><select aria-label="Filter Users" data-status-filter><option>Filter Users</option><option>All Status</option><option>Active</option><option>Pending</option><option>Inactive</option></select></div>
+        <div class="admin-card table-wrap">
+          <table data-user-table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Status</th><th>Join Date</th><th>Actions</th></tr></thead><tbody>
+            <tr><td>Aarav Sharma</td><td>aarav@example.com</td><td>+91 90000 11111</td><td>Website Development</td><td><span class="status active">Active</span></td><td>14 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
+            <tr><td>Meera Patel</td><td>meera@example.com</td><td>+91 90000 22222</td><td>Logo Design</td><td><span class="status pending">Pending</span></td><td>10 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
+            <tr><td>Rohan Verma</td><td>rohan@example.com</td><td>+91 90000 33333</td><td>Excel Automation</td><td><span class="status inactive">Inactive</span></td><td>02 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
+          </tbody></table>
+        </div>
+      </section>
+
+      <section class="admin-section" id="services" data-section>
+        <div class="section-title"><div><p class="eyebrow">Services Management</p><h1>Service Catalog</h1></div><button class="admin-btn primary" data-action="Add New Service">Add New Service</button></div>
+        <div class="management-grid">
+          <article class="admin-card form-card"><h2>Service Editor</h2><label>Service Name<input value="Website Development"></label><label>Pricing<input value="Custom Quote"></label><label>Upload Service Images<input type="file"></label><label>Description<textarea rows="4">Responsive modern websites for businesses.</textarea></label><button class="admin-btn primary">Save Service</button></article>
+          <article class="admin-card list-card"><h2>Available Services</h2><ul><li>Logo Design <span>Edit Delete</span></li><li>Website Development <span>Edit Delete</span></li><li>App Development <span>Edit Delete</span></li><li>Excel Automation <span>Edit Delete</span></li><li>Social Media Design <span>Edit Delete</span></li><li>Shop Management System <span>Edit Delete</span></li></ul></article>
+        </div>
+      </section>
+
+      <section class="admin-section" id="portfolio" data-section>
+        <div class="section-title"><div><p class="eyebrow">Portfolio Management</p><h1>Portfolio Library</h1></div><button class="admin-btn primary" data-action="Upload Portfolio Images">Upload Portfolio Images</button></div>
+        <div class="portfolio-admin-grid">
+          <article class="admin-card upload-card"><h2>Add Category</h2><input placeholder="Category name"><input type="file"><button class="admin-btn primary">Upload</button></article>
+          <article class="admin-card portfolio-mini"><span>SM</span><h3>Social Media Posts</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+          <article class="admin-card portfolio-mini"><span>WD</span><h3>Website Designs</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+          <article class="admin-card portfolio-mini"><span>UI</span><h3>App UI</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+          <article class="admin-card portfolio-mini"><span>BP</span><h3>Business Posters</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+          <article class="admin-card portfolio-mini"><span>ED</span><h3>Excel Dashboards</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+        </div>
+      </section>
+
+      <section class="admin-section" id="orders" data-section>
+        <div class="section-title"><div><p class="eyebrow">Order Management</p><h1>Orders</h1></div><div class="pill-tabs"><button>New Orders</button><button>Pending Orders</button><button>Completed Orders</button><button>Cancelled Orders</button></div></div>
+        <div class="admin-card table-wrap"><table><thead><tr><th>Client Name</th><th>Service</th><th>Price</th><th>Status</th><th>Payment Status</th><th>Delivery Date</th></tr></thead><tbody><tr><td>Aarav Sharma</td><td>Website</td><td>₹18,000</td><td><span class="status active">Active</span></td><td>Paid</td><td>25 May 2026</td></tr><tr><td>Meera Patel</td><td>Logo Design</td><td>₹2,999</td><td><span class="status pending">Pending</span></td><td>Pending</td><td>18 May 2026</td></tr><tr><td>Rohan Verma</td><td>Dashboard</td><td>₹12,000</td><td><span class="status active">Completed</span></td><td>Paid</td><td>12 May 2026</td></tr></tbody></table></div>
+      </section>
+
+      <section class="admin-section" id="clients" data-section>
+        <div class="section-title"><div><p class="eyebrow">Client Management</p><h1>Client Profiles</h1></div><button class="admin-btn primary">Add Client</button></div>
+        <div class="client-grid"><article class="admin-card client-card"><h2>Client Details</h2><h3>Jaipur Retail Co.</h3><p>Contact Information: +91 98752 94387</p><p>Project History: Website, Posters</p><p>Payment History: ₹32,000 paid</p><label>Notes Section<textarea rows="4">Needs festival campaign creatives next month.</textarea></label></article><article class="admin-card client-card"><h2>Client Details</h2><h3>Urban Services</h3><p>Contact Information: info@example.com</p><p>Project History: Logo, App UI</p><p>Payment History: ₹18,500 paid</p><label>Notes Section<textarea rows="4">Follow up for app development quote.</textarea></label></article></div>
+      </section>
+
+      <section class="admin-section" id="payments" data-section>
+        <div class="section-title"><div><p class="eyebrow">Payment Management</p><h1>Payments</h1></div><button class="admin-btn primary">Download Report</button></div>
+        <div class="metric-grid small"><article class="metric-card"><span>TR</span><small>Total Revenue</small><strong>₹4.25L</strong></article><article class="metric-card"><span>PP</span><small>Pending Payments</small><strong>₹38K</strong></article><article class="metric-card"><span>ME</span><small>Monthly Earnings</small><strong>₹82K</strong></article></div>
+        <div class="management-grid"><article class="admin-card table-wrap"><h2>Payment History</h2><table><tbody><tr><td>Invoice #PT-104</td><td>Paid</td><td><button>Invoice Download</button></td></tr><tr><td>Invoice #PT-105</td><td>Pending</td><td><button>Send Reminder</button></td></tr></tbody></table></article><article class="admin-card qr-card"><h2>UPI / QR Payment Support</h2><div class="fake-qr">UPI</div><p>Accept UPI, QR payment, and manual payment status updates.</p></article></div>
+      </section>
+
+      <section class="admin-section" id="messages" data-section>
+        <div class="section-title"><div><p class="eyebrow">Messages & Contacts</p><h1>Lead Inbox</h1></div><button class="admin-btn primary">Mark All as Read</button></div>
+        <div class="message-grid"><article class="admin-card message-card"><span>Contact Form Messages</span><h3>Need website for shop</h3><p>Reply Option · Mark as Read</p></article><article class="admin-card message-card"><span>WhatsApp Leads</span><h3>Logo package enquiry</h3><p>Reply Option · Mark as Read</p></article><article class="admin-card message-card"><span>Instagram Leads</span><h3>Festival poster request</h3><p>Reply Option · Mark as Read</p></article></div>
+      </section>
+
+      <section class="admin-section" id="analytics" data-section>
+        <div class="section-title"><div><p class="eyebrow">Analytics</p><h1>Performance Insights</h1></div></div>
+        <div class="dashboard-grid"><article class="admin-card chart-card"><h2>Lead Growth</h2><canvas width="620" height="260" data-line-chart></canvas></article><article class="admin-card analytics-card"><h2>Traffic Sources</h2><div class="progress-row"><span>Instagram</span><b style="--value:72%"></b></div><div class="progress-row"><span>WhatsApp</span><b style="--value:58%"></b></div><div class="progress-row"><span>Website</span><b style="--value:46%"></b></div></article></div>
+      </section>
+
+      <section class="admin-section" id="settings" data-section>
+        <div class="section-title"><div><p class="eyebrow">Settings Page</p><h1>Admin Settings</h1></div><button class="admin-btn primary">Save Settings</button></div>
+        <div class="settings-grid"><article class="admin-card form-card"><h2>Website Details</h2><label>Update Logo<input type="file"></label><label>Website Name<input value="Pomegranate Technology"></label><label>Social Media Links<input value="https://instagram.com/pomotech.in"></label><label>Change Password<input type="password" placeholder="New password"></label></article><article class="admin-card form-card"><h2>Theme & Notifications</h2><label>Theme Settings<select><option>Red Black Gold</option><option>Light Premium</option></select></label><label>Notification Settings<select><option>All Notifications</option><option>Important Only</option></select></label><button class="admin-btn ghost" data-logout>Logout</button></article></div>
+      </section>
+    </main>
+  </div>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>

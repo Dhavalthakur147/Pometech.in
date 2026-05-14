@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111111">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Pomegranate Technology admin login panel.">
+  <title>Admin Login | Pomegranate Technology</title>
+  <link rel="icon" href="image/logo.jpeg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body class="login-page">
+  <main class="login-shell">
+    <section class="login-brand-panel" aria-label="Pomegranate Technology admin access">
+      <div class="login-glow"></div>
+      <img decoding="async" src="image/logo.jpeg" alt="Pomegranate Technology logo">
+      <p class="eyebrow">Admin Control Panel</p>
+      <h1>Pomegranate Technology</h1>
+      <p>Manage clients, services, orders, payments, messages, portfolio, and business analytics from one premium dashboard.</p>
+    </section>
+
+    <section class="login-card">
+      <p class="eyebrow">Secure Login</p>
+      <h2>Welcome back, Admin</h2>
+      <form data-login-form>
+        <label>Email<input type="email" name="email" placeholder="admin@pomotech.in" autocomplete="email" required></label>
+        <label>Password<input type="password" name="password" placeholder="Enter password" autocomplete="current-password" required></label>
+        <p class="login-error" data-login-error></p>
+        <button class="admin-btn primary" type="submit">Login</button>
+        <button class="admin-btn ghost" type="button" data-forgot>Forgot Password</button>
+      </form>
+      <small>Demo access: use any valid email and password with 6+ characters.</small>
+    </section>
+  </main>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
