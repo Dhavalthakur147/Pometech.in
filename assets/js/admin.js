@@ -1,4 +1,6 @@
+const API_BASE_URL = "https://pometech-in.onrender.com/api";
 const authKey = "pomotech-admin-auth";
+const adminKey = "pomotech-admin-user";
 const loginForm = document.querySelector("[data-login-form]");
 const loginError = document.querySelector("[data-login-error]");
 const forgotButton = document.querySelector("[data-forgot]");
@@ -6,34 +8,89 @@ const dashboardPage = document.body.classList.contains("dashboard-page");
 const loader = document.querySelector("[data-loader]");
 
 if (loginForm) {
-  if (localStorage.getItem(authKey) === "true") {
+  if (localStorage.getItem(authKey)) {
     window.location.href = "admin-dashboard.html";
   }
 
-  loginForm.addEventListener("submit", (event) => {
+  loginForm.addEventListener("submit", async (event) => {
     event.preventDefault();
     const form = new FormData(loginForm);
     const email = String(form.get("email") || "");
     const password = String(form.get("password") || "");
+    const submitButton = loginForm.querySelector("button[type='submit']");
+    const originalText = submitButton?.textContent || "Login";
 
     if (!email.includes("@") || password.length < 6) {
       loginError.textContent = "Enter a valid email and a password with 6+ characters.";
       return;
     }
 
-    localStorage.setItem(authKey, "true");
-    localStorage.setItem("pomotech-admin-email", email);
-    window.location.href = "admin-dashboard.html";
+    try {
+      loginError.textContent = "";
+      if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Logging in...";
+      }
+
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password })
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.message || "Invalid email or password.");
+      }
+
+      localStorage.setItem(authKey, result.token);
+      localStorage.setItem(adminKey, JSON.stringify(result.admin));
+      localStorage.setItem("pomotech-admin-email", result.admin?.email || email);
+      window.location.href = "admin-dashboard.html";
+    } catch (error) {
+      loginError.textContent = error.message || "Login failed. Please try again.";
+    } finally {
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText;
+      }
+    }
   });
 }
 
 if (forgotButton) {
-  forgotButton.addEventListener("click", () => {
-    loginError.textContent = "Password reset flow can be connected to backend email service.";
+  forgotButton.addEventListener("click", async () => {
+    const email = String(new FormData(loginForm).get("email") || "");
+
+    if (!email.includes("@")) {
+      loginError.textContent = "Enter your admin email first.";
+      return;
+    }
+
+    try {
+      forgotButton.disabled = true;
+      loginError.textContent = "";
+      const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      });
+      const result = await response.json().catch(() => ({}));
+
+      if (!response.ok) {
+        throw new Error(result.message || "Unable to send reset email.");
+      }
+
+      loginError.textContent = result.message || "If the email exists, reset instructions were sent.";
+    } catch (error) {
+      loginError.textContent = error.message || "Unable to send reset email.";
+    } finally {
+      forgotButton.disabled = false;
+    }
   });
 }
 
-if (dashboardPage && localStorage.getItem(authKey) !== "true") {
+if (dashboardPage && !localStorage.getItem(authKey)) {
   window.location.href = "admin-login.html";
 }
 
@@ -76,6 +133,8 @@ themeToggle?.addEventListener("click", () => {
 logoutButtons.forEach((button) => {
   button.addEventListener("click", () => {
     localStorage.removeItem(authKey);
+    localStorage.removeItem(adminKey);
+    localStorage.removeItem("pomotech-admin-email");
     window.location.href = "admin-login.html";
   });
 });
