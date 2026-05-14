@@ -3,7 +3,7 @@ import { createModel } from "../models/baseModel.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { notifyAdminOfContact, sendEmail } from "../services/emailService.js";
 
-const messageModel = createModel("messages", ["name", "email", "phone", "message", "status"]);
+const messageModel = createModel("messages", ["name", "email", "phone", "Service", "message"]);
 const crud = createCrudController(messageModel);
 
 export const listMessages = crud.list;
