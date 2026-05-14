@@ -59,6 +59,8 @@ if (contactForm) {
     const payload = {
       name: String(form.get("name") || "").trim(),
       phone: String(form.get("phone") || "").trim(),
+      email: String(form.get("email") || "").trim(),
+      service: String(form.get("service") || "").trim(),
       message: `Service: ${service}\n\n${message || "Please contact me about this service."}`
     };
 
