@@ -1,7 +1,9 @@
 import { z } from "zod";
 
 const uuidParam = z.object({ params: z.object({ id: z.string().uuid() }) });
-const optionalText = z.string().trim().optional().nullable();
+const emptyToNull = (value) => value === "" ? null : value;
+const optionalText = z.preprocess(emptyToNull, z.string().trim().optional().nullable());
+const optionalEmail = z.preprocess(emptyToNull, z.string().trim().email().optional().nullable());
 
 export const serviceSchema = z.object({
   body: z.object({
@@ -37,7 +39,7 @@ export const clientSchema = z.object({
     name: z.string().min(2),
     business_name: optionalText,
     phone: optionalText,
-    email: z.string().email().optional().nullable(),
+    email: optionalEmail,
     service: optionalText,
     status: z.enum(["lead", "active", "inactive", "completed"]).optional()
   })
@@ -64,7 +66,7 @@ export const orderStatusSchema = z.object({
 export const messageSchema = z.object({
   body: z.object({
     name: z.string().min(2),
-    email: z.string().email().optional().nullable(),
+    email: optionalEmail,
     phone: optionalText,
     message: z.string().min(5)
   })
