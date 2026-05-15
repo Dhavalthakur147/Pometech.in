@@ -37,6 +37,14 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+html[lang="gu"] body,
+html[lang="gu"] button,
+html[lang="gu"] input,
+html[lang="gu"] select,
+html[lang="gu"] textarea {
+  font-family: "Noto Sans Gujarati", "Inter", Arial, sans-serif;
+}
+
 body.nav-open {
   overflow: hidden;
 }
@@ -126,6 +134,18 @@ main > .band {
 .site-nav .nav-cta {
   color: #160d02;
   background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+}
+
+.language-toggle {
+  min-height: 40px;
+  border: 1px solid rgba(212, 162, 56, 0.42);
+  border-radius: 999px;
+  padding: 8px 12px;
+  color: var(--gold-soft);
+  background: rgba(255, 255, 255, 0.06);
+  font: inherit;
+  font-weight: 900;
+  cursor: pointer;
 }
 
 .nav-toggle {
@@ -327,6 +347,26 @@ h1 {
   letter-spacing: 0;
 }
 
+html[lang="gu"] h1 {
+  max-width: 820px;
+  font-size: clamp(2.45rem, 6.4vw, 5.2rem);
+  line-height: 1.14;
+  font-weight: 900;
+}
+
+html[lang="gu"] .hero-content {
+  max-width: 820px;
+}
+
+html[lang="gu"] .hero-copy {
+  font-size: 1.05rem;
+  line-height: 1.8;
+}
+
+html[lang="gu"] .eyebrow {
+  font-weight: 900;
+}
+
 h2 {
   margin: 0 0 18px;
   font-size: clamp(2rem, 4vw, 3.6rem);
@@ -421,6 +461,145 @@ h3 {
   grid-template-columns: repeat(4, 1fr);
   gap: 14px;
   padding: 24px 0;
+}
+
+.trust-strip,
+.about-platform,
+.estimate-section,
+.transform-grid {
+  display: grid;
+  gap: 18px;
+}
+
+.trust-strip {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding-top: 42px;
+  padding-bottom: 42px;
+}
+
+.trust-card,
+.platform-card,
+.estimate-results,
+.estimate-form,
+.transform-card,
+.faq-list details {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--glass);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(18px) saturate(135%);
+}
+
+.trust-card,
+.transform-card,
+.estimate-results,
+.estimate-form {
+  padding: 26px;
+}
+
+.trust-card span,
+.estimate-total span {
+  color: var(--gold-soft);
+  font-weight: 900;
+}
+
+.trust-card p,
+.transform-card p,
+.estimate-results p,
+.platform-card span,
+.faq-list p {
+  color: var(--muted);
+}
+
+.about-platform,
+.estimate-section {
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 0.85fr);
+  align-items: center;
+}
+
+.platform-card {
+  display: grid;
+  gap: 14px;
+  padding: 24px;
+}
+
+.platform-card img {
+  width: 96px;
+  height: 96px;
+  border-radius: var(--radius);
+  object-fit: cover;
+}
+
+.platform-card div {
+  display: grid;
+  gap: 4px;
+  padding: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.estimate-section {
+  align-items: stretch;
+}
+
+.estimate-results,
+.estimate-form {
+  display: grid;
+  align-content: center;
+  gap: 16px;
+}
+
+.estimate-total {
+  display: grid;
+  gap: 8px;
+  padding: 20px;
+  border: 1px solid rgba(212, 162, 56, 0.32);
+  border-radius: var(--radius-sm);
+  background: rgba(212, 162, 56, 0.1);
+}
+
+.estimate-total strong {
+  color: var(--gold-soft);
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.transform-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.transform-card {
+  overflow: hidden;
+  min-height: 360px;
+  transition: 0.25s ease;
+}
+
+.transform-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(212, 162, 56, 0.45);
+}
+
+.transform-card img {
+  width: calc(100% + 52px);
+  height: 190px;
+  margin: -26px -26px 22px;
+  object-fit: cover;
+}
+
+.faq-list {
+  display: grid;
+  gap: 12px;
+}
+
+.faq-list details {
+  padding: 20px 22px;
+}
+
+.faq-list summary {
+  cursor: pointer;
+  color: var(--white);
+  font-weight: 900;
 }
 
 .stat,
@@ -1222,10 +1401,15 @@ h3 {
   gap: 14px;
 }
 
-.featured-work-grid {
+.featured-work-grid,
+.demo-work-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 16px;
+}
+
+.demo-work-section {
+  padding-top: 72px;
 }
 
 .work-card {
@@ -1791,6 +1975,10 @@ h1 {
   }
 
   .stats,
+  .trust-strip,
+  .about-platform,
+  .estimate-section,
+  .transform-grid,
   .feature-grid,
   .values,
   .mission-vision,
@@ -1802,6 +1990,7 @@ h1 {
   .pricing-grid,
   .more-services-grid,
   .featured-work-grid,
+  .demo-work-grid,
   .why-profile-grid,
   .portfolio-categories,
   .impact-grid,
@@ -1848,12 +2037,21 @@ h1 {
     font-size: clamp(2.55rem, 15vw, 4.2rem);
   }
 
+  html[lang="gu"] h1 {
+    font-size: clamp(2.2rem, 11vw, 3.45rem);
+    line-height: 1.18;
+  }
+
   .section,
   .page-hero {
     padding: 58px 0;
   }
 
   .stats,
+  .trust-strip,
+  .about-platform,
+  .estimate-section,
+  .transform-grid,
   .feature-grid,
   .values,
   .mission-vision,
@@ -1865,6 +2063,7 @@ h1 {
   .pricing-grid,
   .more-services-grid,
   .featured-work-grid,
+  .demo-work-grid,
   .why-profile-grid,
   .portfolio-categories,
   .impact-grid,

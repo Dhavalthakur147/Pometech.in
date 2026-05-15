@@ -15,7 +15,7 @@
   <link rel="icon" href="image/logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Gujarati:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
@@ -28,137 +28,184 @@
       <span></span><span></span><span></span>
     </button>
     <nav class="site-nav" data-nav>
-      <a class="active" href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="more-services.html">More Services</a>
-      <a class="nav-cta" href="contact.html">Contact</a>
+      <a class="active" href="index.html" data-i18n="nav.home">Home</a>
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#services" data-i18n="nav.services">Services</a>
+      <a href="#demo-work" data-i18n="nav.demo">Demo Work</a>
+      <a href="#estimate" data-i18n="nav.estimate">Estimate</a>
+      <a href="#faq" data-i18n="nav.faq">FAQ</a>
+      <a class="nav-cta" href="contact.html" data-i18n="nav.contact">Contact</a>
+      <button class="language-toggle" type="button" data-language-toggle>ગુજરાતી</button>
     </nav>
   </header>
 
   <main>
     <section class="hero home-hero">
       <div class="hero-graphic" aria-hidden="true">
-        <div class="tech-orbit">
-          <span></span><span></span><span></span><span></span>
-        </div>
-        <div class="circuit-board">
-          <i></i><i></i><i></i><i></i><i></i><i></i>
-        </div>
+        <div class="tech-orbit"><span></span><span></span><span></span><span></span></div>
+        <div class="circuit-board"><i></i><i></i><i></i><i></i><i></i><i></i></div>
         <img decoding="async" src="image/logo.jpeg" alt="">
       </div>
       <div class="hero-content reveal">
-        <p class="eyebrow">Pomegranate Technology</p>
-        <h1>All Digital Solutions For Your Business</h1>
-        <p class="tagline">Innovate <span></span> Transform <span></span> Grow</p>
-        <p class="hero-copy">We Design, We Develop, We Grow Your Brand</p>
+        <p class="eyebrow" data-site-text="home.hero.eyebrow" data-i18n="hero.eyebrow">Pomegranate Technology</p>
+        <h1 data-site-text="home.hero.title" data-i18n="hero.title">Grow Your Business With Digital Services</h1>
+        <p class="tagline" data-site-text="home.hero.tagline" data-i18n-html="hero.tagline">Design <span></span> Develop <span></span> Automate</p>
+        <p class="hero-copy" data-site-text="home.hero.copy" data-i18n="hero.copy">Websites, apps, logo design, social media creatives, shop systems and Excel automation for small businesses, startups and service providers.</p>
         <div class="hero-actions">
-          <a class="btn primary" href="contact.html">Get Started</a>
-          <a class="btn secondary" href="contact.html">Contact Us</a>
+          <a class="btn primary" href="contact.html" data-i18n="hero.primary">Start Your Project</a>
+          <a class="btn secondary" href="#services" data-i18n="hero.secondary">View Services</a>
         </div>
       </div>
     </section>
 
     <section class="stats band">
-      <div class="stat reveal"><strong>100+</strong><span>Designs</span></div>
-      <div class="stat reveal"><strong>50+</strong><span>Clients</span></div>
-      <div class="stat reveal"><strong>Fast</strong><span>Delivery</span></div>
-      <div class="stat reveal"><strong>24/7</strong><span>Support</span></div>
+      <div class="stat reveal"><strong>100+</strong><span data-i18n="stats.projects">Creative Projects</span></div>
+      <div class="stat reveal"><strong>50+</strong><span data-i18n="stats.clients">Business Clients</span></div>
+      <div class="stat reveal"><strong>7 Days</strong><span data-i18n="stats.launch">Fast Launch Options</span></div>
+      <div class="stat reveal"><strong>24/7</strong><span data-i18n="stats.support">WhatsApp Support</span></div>
     </section>
 
-    <section class="section">
+    <section class="section trust-strip">
+      <article class="trust-card reveal"><span>01</span><h3 data-i18n="trust.simple.title">Simple Process</h3><p data-i18n="trust.simple.copy">Share your requirement, approve the plan, and track delivery with clear updates.</p></article>
+      <article class="trust-card reveal"><span>02</span><h3 data-i18n="trust.secure.title">Secure Delivery</h3><p data-i18n="trust.secure.copy">Admin access, business data and project assets are handled carefully.</p></article>
+      <article class="trust-card reveal"><span>03</span><h3 data-i18n="trust.growth.title">Growth Ready</h3><p data-i18n="trust.growth.copy">Every website, design and system is made to help your business get more enquiries.</p></article>
+    </section>
+
+    <section class="section" id="about">
+      <div class="about-platform">
+        <div class="section-copy reveal">
+          <p class="eyebrow" data-i18n="about.eyebrow">All-in-one digital partner</p>
+          <h2 data-i18n="about.title">Your business website, branding and automation in one place.</h2>
+          <p data-i18n="about.copy">Pomegranate Technology helps retailers, service providers, agencies and local businesses build a strong online presence. We create practical digital systems that are easy to manage and ready for real daily use.</p>
+          <a class="btn primary" href="about.html" data-i18n="about.cta">Know More</a>
+        </div>
+        <div class="platform-card reveal">
+          <img decoding="async" src="image/logo.jpeg" alt="Pomegranate Technology logo">
+          <div><strong data-i18n="platform.website.title">Business Website</strong><span data-i18n="platform.website.copy">Landing pages, company sites and portfolios</span></div>
+          <div><strong data-i18n="platform.design.title">Creative Design</strong><span data-i18n="platform.design.copy">Logo, posters, banners and social media posts</span></div>
+          <div><strong data-i18n="platform.automation.title">Automation</strong><span data-i18n="platform.automation.copy">Excel dashboards, shop systems and custom tools</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services">
       <div class="section-heading reveal">
-        <p class="eyebrow">Services preview</p>
-        <h2>Smart digital work for every stage of your business.</h2>
+        <p class="eyebrow" data-i18n="services.eyebrow">Digital solutions</p>
+        <h2 data-i18n="services.title">Services made for real business work.</h2>
       </div>
       <div class="service-preview-grid">
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">LD</span>
-          <h3>Logo Design</h3>
-          <p>Memorable brand marks and polished identity visuals for a professional first impression.</p>
-        </article>
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">WD</span>
-          <h3>Website Development</h3>
-          <p>Modern, responsive, SEO-ready websites designed to convert visitors into customers.</p>
-        </article>
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">AP</span>
-          <h3>App Development</h3>
-          <p>Clean mobile and web app experiences for services, shops, teams, and customer workflows.</p>
-        </article>
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">DA</span>
-          <h3>Data Analysis & Excel Automation</h3>
-          <p>Dashboards, reports, formulas, and automations that make business data easier to use.</p>
-        </article>
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">SM</span>
-          <h3>Custom Shop Management System</h3>
-          <p>Inventory, billing, customer records, and shop operations built around your process.</p>
-        </article>
-        <article class="feature-card service-preview-card reveal">
-          <span class="service-icon">SB</span>
-          <h3>Social Media & Banner Design</h3>
-          <p>Scroll-stopping social posts, ad banners, festival creatives, and brand campaign graphics.</p>
-        </article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">LD</span><h3 data-i18n="service.logo.title">Logo Design</h3><p data-i18n="service.logo.copy">Memorable brand marks and polished identity visuals for a professional first impression.</p></article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">WD</span><h3 data-i18n="service.website.title">Website Development</h3><p data-i18n="service.website.copy">Modern, responsive, SEO-ready websites designed to convert visitors into customers.</p></article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">AP</span><h3 data-i18n="service.app.title">App Development</h3><p data-i18n="service.app.copy">Clean mobile and web app experiences for services, shops, teams, and customer workflows.</p></article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">DA</span><h3 data-i18n="service.data.title">Data Analysis & Excel Automation</h3><p data-i18n="service.data.copy">Dashboards, reports, formulas, and automations that make business data easier to use.</p></article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">SM</span><h3 data-i18n="service.shop.title">Custom Shop Management System</h3><p data-i18n="service.shop.copy">Inventory, billing, customer records, and shop operations built around your process.</p></article>
+        <article class="feature-card service-preview-card reveal"><span class="service-icon">SB</span><h3 data-i18n="service.social.title">Social Media & Banner Design</h3><p data-i18n="service.social.copy">Scroll-stopping social posts, ad banners, festival creatives, and brand campaign graphics.</p></article>
       </div>
+    </section>
+
+    <section class="section demo-work-section" id="demo-work">
+      <div class="section-heading reveal">
+        <p class="eyebrow" data-i18n="demo.eyebrow">Demo Work</p>
+        <h2 data-i18n="demo.title">Explore sample work you can request for your business.</h2>
+      </div>
+      <div class="demo-work-grid" data-demo-work-grid>
+        <article class="work-card reveal"><img decoding="async" loading="lazy" src="image/logo.jpeg" alt="Website demo"><div><h3 data-i18n="demo.website.title">Business Website Demo</h3><p data-i18n="demo.website.copy">Sample modern website layout for service businesses.</p></div></article>
+        <article class="work-card reveal"><img decoding="async" loading="lazy" src="image/WhatsApp Image 2026-05-13 at 8.48.40 PM.jpeg" alt="Logo demo"><div><h3 data-i18n="demo.logo.title">Logo Design Demo</h3><p data-i18n="demo.logo.copy">Professional brand identity sample for small business.</p></div></article>
+        <article class="work-card reveal"><img decoding="async" loading="lazy" src="image/WhatsApp Image 2026-05-13 at 8.48.50 PM.jpeg" alt="Dashboard demo"><div><h3 data-i18n="demo.dashboard.title">Dashboard Demo</h3><p data-i18n="demo.dashboard.copy">Simple business dashboard and report design sample.</p></div></article>
+      </div>
+    </section>
+
+    <section class="section estimate-section" id="estimate">
+      <div class="estimate-results reveal">
+        <p class="eyebrow" data-i18n="estimate.eyebrow">Project estimator</p>
+        <h2 data-i18n="estimate.title">Get a quick budget idea.</h2>
+        <div class="estimate-total"><span data-i18n="estimate.range">Estimated Range</span><strong data-estimate-total>Rs 2,999 - Rs 7,999</strong></div>
+        <p data-i18n="estimate.copy">Final pricing depends on pages, features, content and delivery timeline.</p>
+      </div>
+      <form class="estimate-form reveal" data-estimate-form>
+        <label><span data-i18n="estimate.projectType">Project Type</span><select name="type"><option value="2999">Logo / Poster Design</option><option value="7999">Business Website</option><option value="14999">E-commerce Website</option><option value="19999">App / Web App</option><option value="9999">Excel Automation</option><option value="15999">Shop Management System</option></select></label>
+        <label><span data-i18n="estimate.pages">Pages / Screens</span><input type="number" name="pages" min="1" max="50" value="5"></label>
+        <label><span data-i18n="estimate.features">Extra Features</span><select name="features"><option value="0">Basic</option><option value="3000">Forms and WhatsApp</option><option value="7000">Admin Panel</option><option value="12000">Payment / Login / Dashboard</option></select></label>
+        <label><span data-i18n="estimate.speed">Delivery Speed</span><select name="speed"><option value="0">Normal</option><option value="2500">Fast Delivery</option><option value="5000">Urgent</option></select></label>
+        <button class="btn primary" type="submit" data-i18n="estimate.button">Calculate Estimate</button>
+      </form>
     </section>
 
     <section class="section dark-panel choose-panel">
       <div class="section-heading reveal">
-        <p class="eyebrow">Why choose us</p>
-        <h2>Premium quality, practical pricing, and support that stays with you.</h2>
+        <p class="eyebrow" data-i18n="why.eyebrow">Why choose us</p>
+        <h2 data-i18n="why.title">Premium quality, practical pricing, and support that stays with you.</h2>
       </div>
       <div class="choose-grid">
-        <div class="choose-item reveal"><span>01</span>Professional Design</div>
-        <div class="choose-item reveal"><span>02</span>Fast Delivery</div>
-        <div class="choose-item reveal"><span>03</span>Affordable Pricing</div>
-        <div class="choose-item reveal"><span>04</span>Lifetime Support</div>
-        <div class="choose-item reveal"><span>05</span>Business Growth Focused</div>
+        <div class="choose-item reveal"><span>01</span><b data-i18n="why.design">Professional Design</b></div>
+        <div class="choose-item reveal"><span>02</span><b data-i18n="why.delivery">Fast Delivery</b></div>
+        <div class="choose-item reveal"><span>03</span><b data-i18n="why.pricing">Affordable Pricing</b></div>
+        <div class="choose-item reveal"><span>04</span><b data-i18n="why.support">Lifetime Support</b></div>
+        <div class="choose-item reveal"><span>05</span><b data-i18n="why.growth">Business Growth Focused</b></div>
       </div>
+    </section>
+
+    <section class="section transform-grid">
+      <article class="transform-card reveal"><img decoding="async" loading="lazy" src="image/WhatsApp Image 2026-05-13 at 8.48.40 PM.jpeg" alt="Logo and branding sample"><h3 data-i18n="transform.identity.title">Build Your Identity</h3><p data-i18n="transform.identity.copy">Make your business look professional with logo, brand visuals and social media creatives.</p></article>
+      <article class="transform-card reveal"><img decoding="async" loading="lazy" src="image/logo.jpeg" alt="Website service sample"><h3 data-i18n="transform.online.title">Launch Online</h3><p data-i18n="transform.online.copy">Get a fast, mobile-friendly website with clear services, contact forms and WhatsApp leads.</p></article>
+      <article class="transform-card reveal"><img decoding="async" loading="lazy" src="image/WhatsApp Image 2026-05-13 at 8.48.50 PM.jpeg" alt="Dashboard and automation sample"><h3 data-i18n="transform.smart.title">Manage Smarter</h3><p data-i18n="transform.smart.copy">Use Excel dashboards, billing sheets and custom systems to reduce manual work.</p></article>
+    </section>
+
+    <section class="section faq-section" id="faq">
+      <div class="section-heading reveal">
+        <p class="eyebrow" data-i18n="faq.eyebrow">FAQ</p>
+        <h2 data-i18n="faq.title">Common questions before starting.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="reveal" open><summary data-i18n="faq.delivery.q">How fast can you deliver a website?</summary><p data-i18n="faq.delivery.a">A simple business website can start from 5 to 7 working days after content and requirements are confirmed.</p></details>
+        <details class="reveal"><summary data-i18n="faq.update.q">Can I update website content later?</summary><p data-i18n="faq.update.a">Yes. Your admin panel can update website text, services, portfolio and images.</p></details>
+        <details class="reveal"><summary data-i18n="faq.design.q">Do you provide logo and social media designs?</summary><p data-i18n="faq.design.a">Yes. We provide logo design, posters, Instagram posts, banners, thumbnails and festival creatives.</p></details>
+        <details class="reveal"><summary data-i18n="faq.tools.q">Can you build custom business tools?</summary><p data-i18n="faq.tools.a">Yes. We build Excel automation, dashboards, shop management systems and simple web apps based on your workflow.</p></details>
+      </div>
+    </section>
+
+    <section class="section testimonial-grid">
+      <article class="testimonial-card reveal"><p data-i18n="testimonials.one">"Clean website, quick support and very practical design for our business."</p><span data-i18n="testimonials.owner">Business Owner</span></article>
+      <article class="testimonial-card reveal"><p data-i18n="testimonials.two">"Our posters and logo looked professional, and delivery was fast."</p><span data-i18n="testimonials.retail">Retail Client</span></article>
+      <article class="testimonial-card reveal"><p data-i18n="testimonials.three">"The Excel automation saved time in daily reporting and billing."</p><span data-i18n="testimonials.provider">Service Provider</span></article>
     </section>
 
     <section class="section offer-section">
       <div class="offer-card reveal">
         <div>
-          <p class="eyebrow">Limited offer</p>
-          <h2>Digital Solutions Starting From ₹2999/-</h2>
-          <p>Start with a professional digital presence and scale into websites, automation, designs, and business systems as you grow.</p>
+          <p class="eyebrow" data-i18n="offer.eyebrow">Start today</p>
+          <h2 data-i18n="offer.title">Digital solutions starting from Rs 2999/-</h2>
+          <p data-i18n="offer.copy">Start small with design or a landing page, then scale into websites, automation, apps and business systems as you grow.</p>
         </div>
-        <a class="btn primary" href="https://instagram.com/pomotech.in" target="_blank" rel="noreferrer">DM Us Today</a>
+        <a class="btn primary" href="https://wa.me/919875294387" target="_blank" rel="noreferrer" data-i18n="offer.button">WhatsApp Now</a>
       </div>
     </section>
 
     <section class="section cta-band reveal">
-      <div>
-        <p class="eyebrow">Ready to grow?</p>
-        <h2>DM Us Today</h2>
-      </div>
-      <a class="btn primary" href="https://wa.me/919875294387" target="_blank" rel="noreferrer">Message on WhatsApp</a>
+      <div><p class="eyebrow" data-i18n="cta.eyebrow">Ready to grow?</p><h2 data-i18n="cta.title">Start your digital business setup today.</h2></div>
+      <a class="btn primary" href="contact.html" data-i18n="cta.button">Send Enquiry</a>
     </section>
   </main>
 
   <footer class="site-footer">
     <div>
       <img decoding="async" src="image/logo.jpeg" alt="Pomegranate Technology logo">
-      <p>Pomegranate Technology helps businesses innovate, transform, and grow through modern digital solutions.</p>
+      <p data-site-text="site.footer.copy" data-i18n="footer.copy">Pomegranate Technology helps businesses innovate, transform, and grow through modern digital solutions.</p>
     </div>
     <div>
-      <h3>Quick Links</h3>
-      <a href="about.html">About</a>
-      <a href="portfolio.html">Portfolio</a>
-      <a href="contact.html">Contact</a>
+      <h3 data-i18n="footer.quick">Quick Links</h3>
+      <a href="about.html" data-i18n="nav.about">About</a>
+      <a href="portfolio.html" data-i18n="footer.portfolio">Portfolio</a>
+      <a href="contact.html" data-i18n="nav.contact">Contact</a>
     </div>
     <div>
-      <h3>Services</h3>
-      <a href="services.html">Core Services</a>
-      <a href="more-services.html">More Services</a>
+      <h3 data-i18n="nav.services">Services</h3>
+      <a href="services.html" data-i18n="footer.core">Core Services</a>
+      <a href="more-services.html" data-i18n="footer.more">More Services</a>
       <a href="https://www.pomotech.in">www.pomotech.in</a>
     </div>
     <div>
-      <h3>Connect</h3>
+      <h3 data-i18n="footer.connect">Connect</h3>
       <a href="tel:+919875294387">+91 98752 94387</a>
       <a href="https://instagram.com/pomotech.in" target="_blank" rel="noreferrer">@pomotech.in</a>
       <a href="https://wa.me/919875294387" target="_blank" rel="noreferrer">WhatsApp</a>

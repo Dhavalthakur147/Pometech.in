@@ -22,6 +22,16 @@ export const portfolioSchema = z.object({
   })
 });
 
+export const demoWorkSchema = z.object({
+  body: z.object({
+    title: z.string().min(2),
+    category: z.string().min(2),
+    image: optionalText,
+    link: optionalText,
+    description: optionalText
+  })
+});
+
 export const clientSchema = z.object({
   body: z.object({
     name: z.string().min(2),
@@ -74,6 +84,24 @@ export const paymentSchema = z.object({
     payment_method: z.string().min(2),
     transaction_id: optionalText,
     payment_status: z.enum(["pending", "paid", "failed", "refunded"]).optional()
+  })
+});
+
+export const adminUserSchema = z.object({
+  body: z.object({
+    name: z.string().min(2),
+    email: z.string().email(),
+    password: z.string().min(8).optional(),
+    role: z.enum(["super_admin", "admin", "editor"]).default("admin")
+  })
+});
+
+export const siteContentSchema = z.object({
+  body: z.object({
+    key: z.string().min(2).max(120).regex(/^[a-z0-9_.-]+$/i),
+    value: z.string().min(1),
+    label: optionalText,
+    type: z.enum(["text", "textarea", "url", "image"]).default("text")
   })
 });
 

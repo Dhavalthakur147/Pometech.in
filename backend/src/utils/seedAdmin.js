@@ -5,8 +5,13 @@ import { supabase } from "../config/supabase.js";
 dotenv.config();
 
 const name = process.env.SEED_ADMIN_NAME || "Super Admin";
-const email = (process.env.SEED_ADMIN_EMAIL || "admin@pomotech.in").toLowerCase();
-const password = process.env.SEED_ADMIN_PASSWORD || "ChangeMe123!";
+const email = (process.env.SEED_ADMIN_EMAIL || "pandordhaval1@gmail.com").toLowerCase();
+const password = process.env.SEED_ADMIN_PASSWORD;
+
+if (!password) {
+  console.error("SEED_ADMIN_PASSWORD is required. Add it to backend/.env before running seed:admin.");
+  process.exit(1);
+}
 
 const passwordHash = await bcrypt.hash(password, 12);
 

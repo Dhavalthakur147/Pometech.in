@@ -197,6 +197,12 @@ textarea { border-radius: 14px; resize: vertical; }
   transition: 0.25s ease;
 }
 
+.admin-btn.small {
+  min-height: 36px;
+  padding: 7px 12px;
+  font-size: 0.82rem;
+}
+
 .admin-btn.primary {
   color: #170e03;
   background: linear-gradient(135deg, var(--gold), #f1d17a);
@@ -404,6 +410,13 @@ body[data-theme="light"] .admin-btn.ghost { color: #171717; }
   margin-bottom: 18px;
 }
 
+.quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
 .metric-grid.small { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 
 .metric-card {
@@ -490,6 +503,18 @@ canvas {
   gap: 12px;
   padding: 0;
   list-style: none;
+}
+
+.history-form {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.history-form input {
+  min-height: 38px;
+  padding: 9px 12px;
 }
 
 .table-wrap {
@@ -650,7 +675,8 @@ td button {
   .metric-grid.small,
   .portfolio-admin-grid,
   .message-grid,
-  .toolbar {
+  .toolbar,
+  .history-form {
     grid-template-columns: 1fr;
   }
 }

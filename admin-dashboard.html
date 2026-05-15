@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#111111">
   <meta name="robots" content="noindex, nofollow">
-  <meta name="description" content="Pomegranate Technology admin dashboard for clients, services, portfolio, orders, payments, messages, analytics, and settings.">
+  <meta name="description" content="Simple Pomegranate Technology admin panel for website content, services, portfolio, demo work, leads, and admins.">
   <title>Admin Dashboard | Pomegranate Technology</title>
   <link rel="icon" href="image/logo.jpeg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,16 +22,14 @@
       <span>Pomegranate Admin</span>
     </a>
     <nav class="admin-menu" aria-label="Admin menu">
-      <button class="active" data-section-target="dashboard">Dashboard</button>
-      <button data-section-target="users">Users</button>
+      <button class="active" data-section-target="dashboard">Home</button>
+      <button data-section-target="website">Website</button>
       <button data-section-target="services">Services</button>
       <button data-section-target="portfolio">Portfolio</button>
-      <button data-section-target="orders">Orders</button>
-      <button data-section-target="clients">Clients</button>
-      <button data-section-target="payments">Payments</button>
-      <button data-section-target="messages">Messages</button>
-      <button data-section-target="analytics">Analytics</button>
-      <button data-section-target="settings">Settings</button>
+      <button data-section-target="demo-work">Demo Work</button>
+      <button data-section-target="messages">Leads</button>
+      <button data-section-target="analysis">Analysis</button>
+      <button data-section-target="root">Admins</button>
       <button data-logout>Logout</button>
     </nav>
   </aside>
@@ -39,95 +37,180 @@
   <div class="admin-app">
     <header class="admin-topbar">
       <button class="menu-toggle" type="button" data-sidebar-toggle aria-label="Toggle sidebar">☰</button>
-      <label class="admin-search">Search<input type="search" placeholder="Search dashboard..." data-global-search></label>
-      <button class="icon-button" type="button" aria-label="Notifications">●<span>3</span></button>
+      <label class="admin-search">Search<input type="search" placeholder="Search admin..." data-global-search></label>
       <button class="theme-toggle" type="button" data-theme-toggle>Light</button>
-      <div class="admin-profile"><span>PT</span><div><strong data-admin-name>Admin</strong><small data-admin-email>admin@pomotech.in</small></div></div>
+      <div class="admin-profile"><span>PT</span><div><strong data-admin-name>Admin</strong><small data-admin-email>pandordhaval1@gmail.com</small></div></div>
     </header>
 
     <main class="admin-content">
       <section class="admin-section active" id="dashboard" data-section>
         <div class="section-title">
-          <div><p class="eyebrow">Dashboard Overview</p><h1>Business Control Center</h1></div>
+          <div><p class="eyebrow">Simple Admin Panel</p><h1>Real Website Control</h1></div>
           <a class="admin-btn primary" href="index.html">View Website</a>
         </div>
-        <div class="metric-grid">
-          <article class="metric-card"><span>TC</span><small>Total Clients</small><strong data-counter="50" data-metric="totalClients">0</strong></article>
-          <article class="metric-card"><span>TO</span><small>Total Orders</small><strong data-counter="14" data-metric="totalOrders">0</strong></article>
-          <article class="metric-card"><span>TM</span><small>Total Messages</small><strong data-counter="86" data-metric="totalMessages">0</strong></article>
-          <article class="metric-card"><span>PP</span><small>Pending Payments</small><strong data-counter="8" data-metric="pendingPayments" data-format="currency">0</strong></article>
-          <article class="metric-card"><span>TR</span><small>Total Revenue</small><strong data-counter="425000" data-metric="totalRevenue" data-format="currency">0</strong></article>
-          <article class="metric-card"><span>MG</span><small>Monthly Growth</small><strong data-counter="32" data-metric="monthlyGrowth" data-format="percent">0</strong></article>
+        <div class="quick-actions">
+          <button class="admin-btn ghost" type="button" data-section-jump="website">Update Website</button>
+          <button class="admin-btn ghost" type="button" data-section-jump="services">Add Service</button>
+          <button class="admin-btn ghost" type="button" data-section-jump="portfolio">Add Portfolio</button>
+          <button class="admin-btn ghost" type="button" data-section-jump="demo-work">Add Demo Work</button>
+          <button class="admin-btn ghost" type="button" data-section-jump="messages">Check Leads</button>
         </div>
-        <div class="dashboard-grid">
-          <article class="admin-card chart-card"><div class="card-head"><h2>Revenue Trend</h2><small>Line chart</small></div><canvas width="620" height="260" data-line-chart></canvas></article>
-          <article class="admin-card chart-card"><div class="card-head"><h2>Service Split</h2><small>Pie chart</small></div><canvas width="320" height="260" data-pie-chart></canvas></article>
-          <article class="admin-card analytics-card"><h2>Business Analytics</h2><div class="progress-row"><span>Website Projects</span><b style="--value:78%"></b></div><div class="progress-row"><span>Design Orders</span><b style="--value:64%"></b></div><div class="progress-row"><span>Automation Leads</span><b style="--value:48%"></b></div></article>
-          <article class="admin-card activity-card"><h2>Recent Activity</h2><ul data-recent-activities><li>New website enquiry from Jaipur Retail</li><li>Invoice generated for logo package</li><li>Portfolio image uploaded in Social Media Posts</li><li>Payment marked received for dashboard project</li></ul></article>
-        </div>
+        <article class="admin-card activity-card">
+          <div class="card-head"><h2>Admin Notes</h2><button class="admin-btn ghost small" type="button" data-clear-history>Clear</button></div>
+          <form class="history-form" data-history-form>
+            <input name="history" placeholder="Add note..." aria-label="Add admin note">
+            <button class="admin-btn primary small" type="submit">Add</button>
+          </form>
+          <ul data-recent-activities><li>No admin history yet.</li></ul>
+        </article>
       </section>
 
-      <section class="admin-section" id="users" data-section>
-        <div class="section-title"><div><p class="eyebrow">User Management</p><h1>Manage Users</h1></div><button class="admin-btn primary" data-action="Add User">Add User</button></div>
-        <div class="toolbar"><input type="search" aria-label="Search User" placeholder="Search User..." data-table-search><select aria-label="Filter Users" data-status-filter><option>Filter Users</option><option>All Status</option><option>Active</option><option>Pending</option><option>Inactive</option></select></div>
-        <div class="admin-card table-wrap">
-          <table data-user-table><thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Service</th><th>Status</th><th>Join Date</th><th>Actions</th></tr></thead><tbody>
-            <tr><td>Aarav Sharma</td><td>aarav@example.com</td><td>+91 90000 11111</td><td>Website Development</td><td><span class="status active">Active</span></td><td>14 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
-            <tr><td>Meera Patel</td><td>meera@example.com</td><td>+91 90000 22222</td><td>Logo Design</td><td><span class="status pending">Pending</span></td><td>10 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
-            <tr><td>Rohan Verma</td><td>rohan@example.com</td><td>+91 90000 33333</td><td>Excel Automation</td><td><span class="status inactive">Inactive</span></td><td>02 May 2026</td><td><button>Edit</button><button>Delete</button></td></tr>
-          </tbody></table>
+      <section class="admin-section" id="website" data-section>
+        <div class="section-title"><div><p class="eyebrow">Website</p><h1>Edit Website Text</h1></div><button class="admin-btn primary" data-refresh-site-content>Refresh</button></div>
+        <div class="management-grid">
+          <article class="admin-card form-card">
+            <h2>Content Editor</h2>
+            <form data-site-content-form>
+              <label>Select Page Text
+                <select data-site-content-preset>
+                  <option value="">Custom / Manual Key</option>
+                  <option value="home.hero.eyebrow">Home - Brand Eyebrow</option>
+                  <option value="home.hero.title">Home - Main Title</option>
+                  <option value="home.hero.tagline">Home - Tagline</option>
+                  <option value="home.hero.copy">Home - Hero Description</option>
+                  <option value="site.footer.copy">Footer - Description</option>
+                </select>
+              </label>
+              <label>Content Key<input name="key" placeholder="home.hero.title" required></label>
+              <label>Label<input name="label" placeholder="Home hero title"></label>
+              <label>Type<select name="type"><option value="text">Text</option><option value="textarea">Textarea</option><option value="url">URL</option><option value="image">Image</option></select></label>
+              <label>Value<textarea name="value" rows="6" placeholder="Website text..." required></textarea></label>
+              <p class="login-error" data-site-content-status></p>
+              <button class="admin-btn primary" type="submit">Save Website Change</button>
+            </form>
+          </article>
+          <article class="admin-card table-wrap">
+            <h2>Saved Website Text</h2>
+            <table><thead><tr><th>Key</th><th>Label</th><th>Value</th><th>Actions</th></tr></thead><tbody data-site-content-list><tr><td colspan="4">Loading content...</td></tr></tbody></table>
+          </article>
         </div>
       </section>
 
       <section class="admin-section" id="services" data-section>
-        <div class="section-title"><div><p class="eyebrow">Services Management</p><h1>Service Catalog</h1></div><button class="admin-btn primary" data-action="Add New Service">Add New Service</button></div>
+        <div class="section-title"><div><p class="eyebrow">Services</p><h1>Add Real Services</h1></div><button class="admin-btn primary" data-refresh-services>Refresh</button></div>
         <div class="management-grid">
-          <article class="admin-card form-card"><h2>Service Editor</h2><label>Service Name<input value="Website Development"></label><label>Pricing<input value="Custom Quote"></label><label>Upload Service Images<input type="file"></label><label>Description<textarea rows="4">Responsive modern websites for businesses.</textarea></label><button class="admin-btn primary">Save Service</button></article>
-          <article class="admin-card list-card"><h2>Available Services</h2><ul><li>Logo Design <span>Edit Delete</span></li><li>Website Development <span>Edit Delete</span></li><li>App Development <span>Edit Delete</span></li><li>Excel Automation <span>Edit Delete</span></li><li>Social Media Design <span>Edit Delete</span></li><li>Shop Management System <span>Edit Delete</span></li></ul></article>
+          <article class="admin-card form-card">
+            <h2>Service Editor</h2>
+            <form data-service-form>
+              <input type="hidden" name="id">
+              <label>Service Name<input name="title" placeholder="Website Development" required></label>
+              <label>Price<input name="price" type="number" min="0" step="1" placeholder="2999"></label>
+              <label>Icon<input name="icon" placeholder="WD"></label>
+              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-service-image-input></label>
+              <label>Description<textarea name="description" rows="4" placeholder="Service details" required></textarea></label>
+              <p class="login-error" data-service-status></p>
+              <button class="admin-btn primary" type="submit">Save Service</button>
+            </form>
+          </article>
+          <article class="admin-card table-wrap">
+            <h2>Service List</h2>
+            <table><thead><tr><th>Service</th><th>Price</th><th>Image</th><th>Actions</th></tr></thead><tbody data-service-list><tr><td colspan="4">No services yet.</td></tr></tbody></table>
+          </article>
         </div>
       </section>
 
       <section class="admin-section" id="portfolio" data-section>
-        <div class="section-title"><div><p class="eyebrow">Portfolio Management</p><h1>Portfolio Library</h1></div><button class="admin-btn primary" data-action="Upload Portfolio Images">Upload Portfolio Images</button></div>
-        <div class="portfolio-admin-grid">
-          <article class="admin-card upload-card"><h2>Add Category</h2><input placeholder="Category name"><input type="file"><button class="admin-btn primary">Upload</button></article>
-          <article class="admin-card portfolio-mini"><span>SM</span><h3>Social Media Posts</h3><p>Edit Portfolio · Delete Portfolio</p></article>
-          <article class="admin-card portfolio-mini"><span>WD</span><h3>Website Designs</h3><p>Edit Portfolio · Delete Portfolio</p></article>
-          <article class="admin-card portfolio-mini"><span>UI</span><h3>App UI</h3><p>Edit Portfolio · Delete Portfolio</p></article>
-          <article class="admin-card portfolio-mini"><span>BP</span><h3>Business Posters</h3><p>Edit Portfolio · Delete Portfolio</p></article>
-          <article class="admin-card portfolio-mini"><span>ED</span><h3>Excel Dashboards</h3><p>Edit Portfolio · Delete Portfolio</p></article>
+        <div class="section-title"><div><p class="eyebrow">Portfolio</p><h1>Add Real Portfolio</h1></div><button class="admin-btn primary" data-refresh-portfolio>Refresh</button></div>
+        <div class="management-grid">
+          <article class="admin-card form-card">
+            <h2>Portfolio Editor</h2>
+            <form data-portfolio-form>
+              <input type="hidden" name="id">
+              <label>Title<input name="title" placeholder="Project title" required></label>
+              <label>Category<select name="category" required><option value="">Select Category</option><option>Social Media Posts</option><option>Website Designs</option><option>App UI</option><option>Business Posters</option><option>Excel Dashboards</option><option>Logo Designs</option><option>Festival Posters</option><option>Brochure Designs</option></select></label>
+              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-portfolio-image-input></label>
+              <label>Description<textarea name="description" rows="4" placeholder="Project details"></textarea></label>
+              <p class="login-error" data-portfolio-status></p>
+              <button class="admin-btn primary" type="submit">Save Portfolio</button>
+            </form>
+          </article>
+          <article class="admin-card table-wrap">
+            <h2>Portfolio Items</h2>
+            <table><thead><tr><th>Title</th><th>Category</th><th>Image</th><th>Actions</th></tr></thead><tbody data-portfolio-list><tr><td colspan="4">No portfolio yet.</td></tr></tbody></table>
+          </article>
         </div>
       </section>
 
-      <section class="admin-section" id="orders" data-section>
-        <div class="section-title"><div><p class="eyebrow">Order Management</p><h1>Orders</h1></div><div class="pill-tabs"><button>New Orders</button><button>Pending Orders</button><button>Completed Orders</button><button>Cancelled Orders</button></div></div>
-        <div class="admin-card table-wrap"><table><thead><tr><th>Client Name</th><th>Service</th><th>Price</th><th>Status</th><th>Payment Status</th><th>Delivery Date</th></tr></thead><tbody><tr><td>Aarav Sharma</td><td>Website</td><td>₹18,000</td><td><span class="status active">Active</span></td><td>Paid</td><td>25 May 2026</td></tr><tr><td>Meera Patel</td><td>Logo Design</td><td>₹2,999</td><td><span class="status pending">Pending</span></td><td>Pending</td><td>18 May 2026</td></tr><tr><td>Rohan Verma</td><td>Dashboard</td><td>₹12,000</td><td><span class="status active">Completed</span></td><td>Paid</td><td>12 May 2026</td></tr></tbody></table></div>
-      </section>
-
-      <section class="admin-section" id="clients" data-section>
-        <div class="section-title"><div><p class="eyebrow">Client Management</p><h1>Client Profiles</h1></div><button class="admin-btn primary">Add Client</button></div>
-        <div class="client-grid"><article class="admin-card client-card"><h2>Client Details</h2><h3>Jaipur Retail Co.</h3><p>Contact Information: +91 98752 94387</p><p>Project History: Website, Posters</p><p>Payment History: ₹32,000 paid</p><label>Notes Section<textarea rows="4">Needs festival campaign creatives next month.</textarea></label></article><article class="admin-card client-card"><h2>Client Details</h2><h3>Urban Services</h3><p>Contact Information: info@example.com</p><p>Project History: Logo, App UI</p><p>Payment History: ₹18,500 paid</p><label>Notes Section<textarea rows="4">Follow up for app development quote.</textarea></label></article></div>
-      </section>
-
-      <section class="admin-section" id="payments" data-section>
-        <div class="section-title"><div><p class="eyebrow">Payment Management</p><h1>Payments</h1></div><button class="admin-btn primary">Download Report</button></div>
-        <div class="metric-grid small"><article class="metric-card"><span>TR</span><small>Total Revenue</small><strong>₹4.25L</strong></article><article class="metric-card"><span>PP</span><small>Pending Payments</small><strong>₹38K</strong></article><article class="metric-card"><span>ME</span><small>Monthly Earnings</small><strong>₹82K</strong></article></div>
-        <div class="management-grid"><article class="admin-card table-wrap"><h2>Payment History</h2><table><tbody><tr><td>Invoice #PT-104</td><td>Paid</td><td><button>Invoice Download</button></td></tr><tr><td>Invoice #PT-105</td><td>Pending</td><td><button>Send Reminder</button></td></tr></tbody></table></article><article class="admin-card qr-card"><h2>UPI / QR Payment Support</h2><div class="fake-qr">UPI</div><p>Accept UPI, QR payment, and manual payment status updates.</p></article></div>
+      <section class="admin-section" id="demo-work" data-section>
+        <div class="section-title"><div><p class="eyebrow">Demo Work</p><h1>Add Real Demo Work</h1></div><button class="admin-btn primary" data-refresh-demo-work>Refresh</button></div>
+        <div class="management-grid">
+          <article class="admin-card form-card">
+            <h2>Demo Work Editor</h2>
+            <form data-demo-work-form>
+              <input type="hidden" name="id">
+              <label>Title<input name="title" placeholder="Restaurant Website Demo" required></label>
+              <label>Category<select name="category" required><option value="">Select Category</option><option>Website Demo</option><option>Logo Demo</option><option>Poster Demo</option><option>Dashboard Demo</option><option>App UI Demo</option><option>Automation Demo</option></select></label>
+              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-demo-work-image-input></label>
+              <label>Demo Link<input name="link" placeholder="https://example.com"></label>
+              <label>Description<textarea name="description" rows="4" placeholder="Demo work details"></textarea></label>
+              <p class="login-error" data-demo-work-status></p>
+              <button class="admin-btn primary" type="submit">Save Demo Work</button>
+            </form>
+          </article>
+          <article class="admin-card table-wrap">
+            <h2>Demo Work Items</h2>
+            <table><thead><tr><th>Title</th><th>Category</th><th>Link</th><th>Actions</th></tr></thead><tbody data-demo-work-list><tr><td colspan="4">No demo work yet.</td></tr></tbody></table>
+          </article>
+        </div>
       </section>
 
       <section class="admin-section" id="messages" data-section>
-        <div class="section-title"><div><p class="eyebrow">Messages & Contacts</p><h1>Lead Inbox</h1></div><button class="admin-btn primary">Mark All as Read</button></div>
-        <div class="message-grid"><article class="admin-card message-card"><span>Contact Form Messages</span><h3>Need website for shop</h3><p>Reply Option · Mark as Read</p></article><article class="admin-card message-card"><span>WhatsApp Leads</span><h3>Logo package enquiry</h3><p>Reply Option · Mark as Read</p></article><article class="admin-card message-card"><span>Instagram Leads</span><h3>Festival poster request</h3><p>Reply Option · Mark as Read</p></article></div>
+        <div class="section-title"><div><p class="eyebrow">Real Leads</p><h1>Contact Enquiries</h1></div><button class="admin-btn primary" data-refresh-messages>Refresh</button></div>
+        <div class="admin-card table-wrap">
+          <table><thead><tr><th>Name</th><th>Contact</th><th>Message</th><th>Status</th><th>Actions</th></tr></thead><tbody data-message-list><tr><td colspan="5">No leads yet.</td></tr></tbody></table>
+        </div>
       </section>
 
-      <section class="admin-section" id="analytics" data-section>
-        <div class="section-title"><div><p class="eyebrow">Analytics</p><h1>Performance Insights</h1></div></div>
-        <div class="dashboard-grid"><article class="admin-card chart-card"><h2>Lead Growth</h2><canvas width="620" height="260" data-line-chart></canvas></article><article class="admin-card analytics-card"><h2>Traffic Sources</h2><div class="progress-row"><span>Instagram</span><b style="--value:72%"></b></div><div class="progress-row"><span>WhatsApp</span><b style="--value:58%"></b></div><div class="progress-row"><span>Website</span><b style="--value:46%"></b></div></article></div>
+      <section class="admin-section" id="analysis" data-section>
+        <div class="section-title"><div><p class="eyebrow">Analysis</p><h1>Business Overview</h1></div><button class="admin-btn primary" data-refresh-analysis>Refresh Analysis</button></div>
+        <div class="metric-grid">
+          <article class="metric-card"><span>CL</span><small>Total Clients</small><strong data-counter="0" data-metric="totalClients">0</strong></article>
+          <article class="metric-card"><span>OR</span><small>Total Orders</small><strong data-counter="0" data-metric="totalOrders">0</strong></article>
+          <article class="metric-card"><span>LD</span><small>Total Leads</small><strong data-counter="0" data-metric="totalMessages">0</strong></article>
+          <article class="metric-card"><span>PP</span><small>Pending Payments</small><strong data-counter="0" data-metric="pendingPayments" data-format="currency">0</strong></article>
+          <article class="metric-card"><span>TR</span><small>Total Revenue</small><strong data-counter="0" data-metric="totalRevenue" data-format="currency">0</strong></article>
+          <article class="metric-card"><span>GR</span><small>Monthly Growth</small><strong data-counter="0" data-metric="monthlyGrowth" data-format="percent">0</strong></article>
+        </div>
+        <div class="dashboard-grid">
+          <article class="admin-card chart-card"><div class="card-head"><h2>Revenue Chart</h2><small>Paid payments</small></div><canvas width="620" height="260" data-revenue-chart></canvas></article>
+          <article class="admin-card chart-card"><div class="card-head"><h2>Order Status</h2><small>Orders by status</small></div><canvas width="360" height="260" data-order-chart></canvas></article>
+          <article class="admin-card chart-card"><div class="card-head"><h2>Service Revenue</h2><small>Top services</small></div><canvas width="620" height="260" data-service-chart></canvas></article>
+        </div>
       </section>
 
-      <section class="admin-section" id="settings" data-section>
-        <div class="section-title"><div><p class="eyebrow">Settings Page</p><h1>Admin Settings</h1></div><button class="admin-btn primary">Save Settings</button></div>
-        <div class="settings-grid"><article class="admin-card form-card"><h2>Website Details</h2><label>Update Logo<input type="file"></label><label>Website Name<input value="Pomegranate Technology"></label><label>Social Media Links<input value="https://instagram.com/pomotech.in"></label><label>Change Password<input type="password" placeholder="New password"></label></article><article class="admin-card form-card"><h2>Theme & Notifications</h2><label>Theme Settings<select><option>Red Black Gold</option><option>Light Premium</option></select></label><label>Notification Settings<select><option>All Notifications</option><option>Important Only</option></select></label><button class="admin-btn ghost" data-logout>Logout</button></article></div>
+      <section class="admin-section" id="root" data-section>
+        <div class="section-title"><div><p class="eyebrow">Admins</p><h1>Admin Accounts</h1></div><button class="admin-btn primary" data-refresh-admins>Refresh</button></div>
+        <div class="management-grid">
+          <article class="admin-card form-card">
+            <h2>Create Admin</h2>
+            <form data-admin-user-form>
+              <input type="hidden" name="id">
+              <label>Name<input name="name" placeholder="Admin name" required></label>
+              <label>Email<input type="email" name="email" placeholder="admin@example.com" required></label>
+              <label>Password<input type="password" name="password" placeholder="New password"></label>
+              <label>Role<select name="role"><option value="super_admin">Super Admin</option><option value="admin">Admin</option><option value="editor">Editor</option></select></label>
+              <p class="login-error" data-admin-user-status></p>
+              <button class="admin-btn primary" type="submit">Save Admin</button>
+            </form>
+          </article>
+          <article class="admin-card table-wrap">
+            <h2>Admin List</h2>
+            <table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Created</th><th>Actions</th></tr></thead><tbody data-admin-users><tr><td colspan="5">No admins loaded.</td></tr></tbody></table>
+          </article>
+        </div>
       </section>
     </main>
   </div>

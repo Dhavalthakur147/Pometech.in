@@ -20,13 +20,8 @@ export const overview = asyncHandler(async (_req, res) => {
       totalMessages: messages,
       totalRevenue,
       pendingPayments,
-      monthlyGrowth: 32,
-      recentActivities: [
-        "New contact form lead received",
-        "Payment marked as paid",
-        "Portfolio item uploaded",
-        "New service enquiry created"
-      ]
+      monthlyGrowth: 0,
+      recentActivities: []
     }
   });
 });
