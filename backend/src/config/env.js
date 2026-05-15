@@ -22,13 +22,18 @@ const defaultCorsOrigins = [
   "http://localhost:5173"
 ].map(normalizeOrigin);
 
+const corsOrigins = [
+  ...(process.env.CORS_ORIGINS ? splitOrigins(process.env.CORS_ORIGINS) : []),
+  ...defaultCorsOrigins
+];
+
 export const env = {
   NODE_ENV: process.env.NODE_ENV || "development",
   PORT: Number(process.env.PORT || 5000),
   API_BASE_URL: process.env.API_BASE_URL || "https://pometech-in.onrender.com",
   FRONTEND_URL: normalizeOrigin(process.env.FRONTEND_URL || defaultFrontendUrl),
   ADMIN_FRONTEND_URL: normalizeOrigin(process.env.ADMIN_FRONTEND_URL || defaultAdminFrontendUrl),
-  CORS_ORIGINS: process.env.CORS_ORIGINS ? splitOrigins(process.env.CORS_ORIGINS) : defaultCorsOrigins,
+  CORS_ORIGINS: [...new Set(corsOrigins)],
   SUPABASE_URL: process.env.SUPABASE_URL || "",
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET || "pomotech-uploads",
