@@ -12,3 +12,9 @@ services:
         value: production
       - key: PORT
         value: 10000
+      - key: FRONTEND_URL
+        value: https://pometech-in.vercel.app
+      - key: ADMIN_FRONTEND_URL
+        value: https://pometech-in.vercel.app
+      - key: CORS_ORIGINS
+        value: https://pometech-in.vercel.app,https://pometech-in-git-main-dhavalthakur147s-projects.vercel.app,http://localhost:3000,http://localhost:5173

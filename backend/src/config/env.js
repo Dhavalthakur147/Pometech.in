@@ -9,15 +9,26 @@ for (const key of required) {
   }
 }
 
-const splitOrigins = (value) => value.split(",").map((item) => item.trim()).filter(Boolean);
+const normalizeOrigin = (value) => value.trim().replace(/\/+$/, "");
+const splitOrigins = (value) => value.split(",").map(normalizeOrigin).filter(Boolean);
+
+const defaultFrontendUrl = "https://pometech-in.vercel.app";
+const defaultAdminFrontendUrl = "https://pometech-in.vercel.app";
+const defaultCorsOrigins = [
+  process.env.FRONTEND_URL || defaultFrontendUrl,
+  process.env.ADMIN_FRONTEND_URL || defaultAdminFrontendUrl,
+  "https://pometech-in-git-main-dhavalthakur147s-projects.vercel.app",
+  "http://localhost:3000",
+  "http://localhost:5173"
+].map(normalizeOrigin);
 
 export const env = {
   NODE_ENV: process.env.NODE_ENV || "development",
   PORT: Number(process.env.PORT || 5000),
   API_BASE_URL: process.env.API_BASE_URL || "https://pometech-in.onrender.com",
-  FRONTEND_URL: process.env.FRONTEND_URL || "https://pometech-in-git-main-dhavalthakur147s-projects.vercel.app/",
-  ADMIN_FRONTEND_URL: process.env.ADMIN_FRONTEND_URL || "https://pometech-in-git-main-dhavalthakur147s-projects.vercel.app/",
-  CORS_ORIGINS: splitOrigins(process.env.CORS_ORIGINS || `${process.env.FRONTEND_URL || "https://pometech-in-git-main-dhavalthakur147s-projects.vercel.app/"},${process.env.ADMIN_FRONTEND_URL || "http://localhost:3000"}`),
+  FRONTEND_URL: normalizeOrigin(process.env.FRONTEND_URL || defaultFrontendUrl),
+  ADMIN_FRONTEND_URL: normalizeOrigin(process.env.ADMIN_FRONTEND_URL || defaultAdminFrontendUrl),
+  CORS_ORIGINS: process.env.CORS_ORIGINS ? splitOrigins(process.env.CORS_ORIGINS) : defaultCorsOrigins,
   SUPABASE_URL: process.env.SUPABASE_URL || "",
   SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   SUPABASE_STORAGE_BUCKET: process.env.SUPABASE_STORAGE_BUCKET || "pomotech-uploads",
