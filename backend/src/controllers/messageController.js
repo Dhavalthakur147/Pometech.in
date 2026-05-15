@@ -2,6 +2,7 @@ import { createCrudController } from "./crudController.js";
 import { createModel } from "../models/baseModel.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { notifyAdminOfContact, sendEmail } from "../services/emailService.js";
+import { logger } from "../utils/logger.js";
 
 const messageModel = createModel("messages", ["name", "email", "phone", "Service", "message"]);
 const crud = createCrudController(messageModel);
@@ -10,9 +11,23 @@ export const listMessages = crud.list;
 export const deleteMessage = crud.remove;
 
 export const saveContactForm = asyncHandler(async (req, res) => {
-  const data = await messageModel.create({ ...req.body, status: "unread" });
-  await notifyAdminOfContact(data);
-  res.status(201).json({ success: true, data, whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}` });
+  const lead = { ...req.body, status: "unread" };
+  const emailResult = await notifyAdminOfContact(lead);
+  let data = null;
+
+  try {
+    data = await messageModel.create(lead);
+  } catch (error) {
+    logger.error(`Contact lead email sent, but database save failed: ${error.message}`);
+  }
+
+  res.status(201).json({
+    success: true,
+    data: data || lead,
+    saved: Boolean(data),
+    email: emailResult?.skipped ? "skipped" : "sent",
+    whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
+  });
 });
 
 export const replyMessage = asyncHandler(async (req, res) => {
