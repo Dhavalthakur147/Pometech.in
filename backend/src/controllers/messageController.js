@@ -10,22 +10,29 @@ const crud = createCrudController(messageModel);
 export const listMessages = crud.list;
 export const deleteMessage = crud.remove;
 
-export const saveContactForm = asyncHandler(async (req, res) => {
-  const lead = { ...req.body, status: "unread" };
-  const emailResult = await notifyAdminOfContact(lead);
-  let data = null;
+async function processContactLead(lead) {
+  const [emailResult, saveResult] = await Promise.allSettled([
+    notifyAdminOfContact(lead),
+    messageModel.create(lead)
+  ]);
 
-  try {
-    data = await messageModel.create(lead);
-  } catch (error) {
-    logger.error(`Contact lead email sent, but database save failed: ${error.message}`);
+  if (emailResult.status === "rejected") {
+    logger.error(`Contact lead email failed: ${emailResult.reason.message}`);
   }
 
-  res.status(201).json({
+  if (saveResult.status === "rejected") {
+    logger.error(`Contact lead database save failed: ${saveResult.reason.message}`);
+  }
+}
+
+export const saveContactForm = asyncHandler(async (req, res) => {
+  const lead = { ...req.body, status: "unread" };
+  processContactLead(lead).catch((error) => logger.error(`Contact lead processing failed: ${error.message}`));
+
+  res.status(202).json({
     success: true,
-    data: data || lead,
-    saved: Boolean(data),
-    email: emailResult?.skipped ? "skipped" : "sent",
+    queued: true,
+    message: "Enquiry received. Our team will contact you soon.",
     whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
   });
 });
