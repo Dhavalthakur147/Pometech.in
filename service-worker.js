@@ -1,4 +1,4 @@
-const CACHE_NAME = "pomotech-web-app-v1";
+const CACHE_NAME = "pomotech-web-app-v2";
 
 const STATIC_ASSETS = [
   "/",
