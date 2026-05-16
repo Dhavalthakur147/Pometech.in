@@ -45,7 +45,7 @@ export const env = {
   SMTP_SECURE: process.env.SMTP_SECURE === "true",
   SMTP_USER: process.env.SMTP_USER || "",
   SMTP_PASS: process.env.SMTP_PASS || "",
-  SMTP_TIMEOUT_MS: Number(process.env.SMTP_TIMEOUT_MS || 10000),
+  SMTP_TIMEOUT_MS: Number(process.env.SMTP_TIMEOUT_MS || 5000),
   MAIL_FROM: process.env.MAIL_FROM || "Pomegranate Technology <no-reply@pomotech.in>",
   ADMIN_EMAIL: process.env.ADMIN_EMAIL || "admin@pomotech.in",
   WHATSAPP_PHONE: process.env.WHATSAPP_PHONE || "919875294387",

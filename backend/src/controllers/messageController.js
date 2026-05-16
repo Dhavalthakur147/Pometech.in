@@ -12,33 +12,22 @@ const crud = createCrudController(messageModel);
 export const listMessages = crud.list;
 export const deleteMessage = crud.remove;
 
-async function processContactLead(lead) {
+function buildSavedLead(lead) {
   const { service, website, startedAt, recaptchaToken, status, ...databaseLead } = lead;
-  const savedLead = {
+  return {
     ...databaseLead,
     message: service && !databaseLead.message.toLowerCase().includes("service:")
       ? `Service: ${service}\n\n${databaseLead.message}`
       : databaseLead.message
   };
+}
 
-  const [emailResult, saveResult] = await Promise.allSettled([
-    notifyAdminOfContact(lead),
-    messageModel.create(savedLead)
-  ]);
-
-  if (emailResult.status === "rejected") {
-    logger.error(`Contact lead email failed: ${emailResult.reason.message}`);
-  }
-
-  if (saveResult.status === "rejected") {
-    logger.error(`Contact lead database save failed: ${saveResult.reason.message}`);
-  }
-
-  return {
-    emailSent: emailResult.status === "fulfilled" && !emailResult.value?.skipped,
-    emailSkipped: emailResult.status === "fulfilled" && Boolean(emailResult.value?.skipped),
-    saved: saveResult.status === "fulfilled"
-  };
+function sendContactEmailInBackground(lead) {
+  notifyAdminOfContact(lead)
+    .then((result) => {
+      if (result?.skipped) logger.warn("Contact lead email skipped because SMTP is not configured.");
+    })
+    .catch((error) => logger.error(`Contact lead email failed: ${error.message}`));
 }
 
 export const saveContactForm = asyncHandler(async (req, res) => {
@@ -58,27 +47,27 @@ export const saveContactForm = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Please complete the security check and try again.");
   }
 
-  const result = await processContactLead(lead);
-
-  if (!result.emailSent && !result.saved) {
+  let saved = false;
+  try {
+    await messageModel.create(buildSavedLead(lead));
+    saved = true;
+  } catch (error) {
+    logger.error(`Contact lead database save failed: ${error.message}`);
     res.status(500).json({
       success: false,
-      message: result.emailSkipped
-        ? "Email is not configured on the server. Please contact us on WhatsApp."
-        : "Unable to receive enquiry right now. Please contact us on WhatsApp.",
+      message: "Unable to receive enquiry right now. Please contact us on WhatsApp.",
       whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
     });
     return;
   }
 
+  sendContactEmailInBackground(lead);
+
   res.status(202).json({
     success: true,
-    emailSent: result.emailSent,
-    emailSkipped: result.emailSkipped,
-    saved: result.saved,
-    message: result.emailSent
-      ? "Enquiry received and sent to admin email."
-      : "Enquiry received. Admin email is not configured, but your details were saved.",
+    emailQueued: true,
+    saved,
+    message: "Enquiry received. Our team will contact you soon.",
     whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
   });
 });
