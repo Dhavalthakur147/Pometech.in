@@ -1,19 +1,28 @@
 {
   "name": "Pomegranate Technology",
   "short_name": "Pomotech",
+  "id": "/",
+  "description": "Pomegranate Technology web app for digital services, enquiries, portfolio, and business solutions.",
+  "start_url": "/index.html",
+  "scope": "/",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "theme_color": "#111111",
   "background_color": "#111111",
-  "display": "standalone"
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "categories": ["business", "productivity", "utilities"]
 }

@@ -12,6 +12,14 @@ const estimateTotal = document.querySelector("[data-estimate-total]");
 const languageToggle = document.querySelector("[data-language-toggle]");
 const languageKey = "pomotech-language";
 
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").catch(() => {
+      // The website still works normally if service worker registration fails.
+    });
+  });
+}
+
 const translations = {
   gu: {
     "nav.home": "હોમ",
