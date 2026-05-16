@@ -63,7 +63,9 @@ export const saveContactForm = asyncHandler(async (req, res) => {
   if (!result.emailSent && !result.saved) {
     res.status(500).json({
       success: false,
-      message: "Unable to receive enquiry right now. Please contact us on WhatsApp.",
+      message: result.emailSkipped
+        ? "Email is not configured on the server. Please contact us on WhatsApp."
+        : "Unable to receive enquiry right now. Please contact us on WhatsApp.",
       whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
     });
     return;
@@ -74,7 +76,9 @@ export const saveContactForm = asyncHandler(async (req, res) => {
     emailSent: result.emailSent,
     emailSkipped: result.emailSkipped,
     saved: result.saved,
-    message: "Enquiry received. Our team will contact you soon.",
+    message: result.emailSent
+      ? "Enquiry received and sent to admin email."
+      : "Enquiry received. Admin email is not configured, but your details were saved.",
     whatsappLeadUrl: `https://wa.me/${process.env.WHATSAPP_PHONE || "919875294387"}`
   });
 });

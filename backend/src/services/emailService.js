@@ -15,14 +15,29 @@ export async function sendEmail({ to, subject, html, text, replyTo }) {
     return { skipped: true };
   }
 
-  return mailer.sendMail({
-    from: getMailFrom(),
-    to,
-    replyTo,
-    subject,
-    html,
-    text
-  });
+  if (!to || (Array.isArray(to) && !to.length)) {
+    logger.warn(`Email skipped because no recipient is configured: ${subject}`);
+    return { skipped: true, reason: "missing-recipient" };
+  }
+
+  try {
+    const result = await mailer.sendMail({
+      from: getMailFrom(),
+      to,
+      replyTo,
+      subject,
+      html,
+      text
+    });
+    logger.info(`Email sent: ${subject} (${result.messageId || "no-message-id"})`);
+    return result;
+  } catch (error) {
+    const hint = env.SMTP_HOST.includes("gmail")
+      ? " For Gmail, use a Gmail App Password in SMTP_PASS and enable 2-Step Verification."
+      : "";
+    logger.error(`Email send failed: ${error.message}.${hint}`);
+    throw error;
+  }
 }
 
 function escapeHtml(value = "") {
