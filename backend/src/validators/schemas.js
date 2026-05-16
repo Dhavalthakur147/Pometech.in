@@ -68,6 +68,7 @@ export const messageSchema = z.object({
     name: z.string().min(2),
     email: optionalEmail,
     phone: optionalText,
+    service: optionalText,
     message: z.string().min(5)
   })
 });

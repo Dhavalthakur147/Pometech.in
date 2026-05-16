@@ -41,7 +41,7 @@ export async function notifyAdminOfContact(message) {
     to: recipients,
     replyTo: message.email || undefined,
     subject: "New Pomegranate Technology contact lead",
-    html: `<h2>New Contact Lead</h2><p><b>Name:</b> ${escapeHtml(message.name)}</p><p><b>Phone:</b> ${escapeHtml(message.phone || "N/A")}</p><p><b>Email:</b> ${escapeHtml(message.email || "N/A")}</p><p>${safeMessage}</p>`,
-    text: `${message.name} - ${message.phone || ""} - ${message.email || ""}: ${message.message}`
+    html: `<h2>New Contact Lead</h2><p><b>Name:</b> ${escapeHtml(message.name)}</p><p><b>Phone:</b> ${escapeHtml(message.phone || "N/A")}</p><p><b>Email:</b> ${escapeHtml(message.email || "N/A")}</p><p><b>Service:</b> ${escapeHtml(message.service || "N/A")}</p><p><b>Message:</b><br>${safeMessage}</p>`,
+    text: `Name: ${message.name}\nPhone: ${message.phone || "N/A"}\nEmail: ${message.email || "N/A"}\nService: ${message.service || "N/A"}\n\n${message.message}`
   });
 }
