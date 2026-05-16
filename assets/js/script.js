@@ -11,6 +11,58 @@ const estimateForm = document.querySelector("[data-estimate-form]");
 const estimateTotal = document.querySelector("[data-estimate-total]");
 const languageToggle = document.querySelector("[data-language-toggle]");
 const languageKey = "pomotech-language";
+let deferredInstallPrompt = null;
+
+function isStandaloneApp() {
+  return window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+}
+
+function createInstallPrompt() {
+  if (document.querySelector("[data-install-prompt]") || isStandaloneApp()) return null;
+
+  const prompt = document.createElement("div");
+  prompt.className = "install-app-prompt";
+  prompt.dataset.installPrompt = "true";
+  prompt.innerHTML = `
+    <div>
+      <strong>Install Pomegranate Technology</strong>
+      <span>Open this website like an app from your home screen.</span>
+    </div>
+    <div class="install-app-actions">
+      <button type="button" data-dismiss-install>Later</button>
+      <button type="button" data-install-app>Install App</button>
+    </div>
+  `;
+  document.body.append(prompt);
+
+  prompt.querySelector("[data-dismiss-install]")?.addEventListener("click", () => {
+    localStorage.setItem("pomotech-install-dismissed", String(Date.now()));
+    prompt.classList.remove("show");
+  });
+
+  prompt.querySelector("[data-install-app]")?.addEventListener("click", async () => {
+    if (!deferredInstallPrompt) {
+      prompt.querySelector("span").textContent = "Use browser menu and choose Add to Home screen.";
+      return;
+    }
+
+    deferredInstallPrompt.prompt();
+    await deferredInstallPrompt.userChoice.catch(() => null);
+    deferredInstallPrompt = null;
+    prompt.classList.remove("show");
+  });
+
+  return prompt;
+}
+
+function showInstallPrompt() {
+  const dismissedAt = Number(localStorage.getItem("pomotech-install-dismissed") || 0);
+  const dismissedRecently = dismissedAt && Date.now() - dismissedAt < 7 * 24 * 60 * 60 * 1000;
+  if (dismissedRecently || isStandaloneApp()) return;
+
+  const prompt = createInstallPrompt();
+  if (prompt) setTimeout(() => prompt.classList.add("show"), 1200);
+}
 
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", () => {
@@ -19,6 +71,22 @@ if ("serviceWorker" in navigator) {
     });
   });
 }
+
+window.addEventListener("beforeinstallprompt", (event) => {
+  event.preventDefault();
+  deferredInstallPrompt = event;
+  showInstallPrompt();
+});
+
+window.addEventListener("appinstalled", () => {
+  deferredInstallPrompt = null;
+  document.querySelector("[data-install-prompt]")?.classList.remove("show");
+});
+
+window.addEventListener("load", () => {
+  const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  if (isIOS && !isStandaloneApp()) showInstallPrompt();
+});
 
 const translations = {
   gu: {
