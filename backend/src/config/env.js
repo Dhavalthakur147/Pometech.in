@@ -48,6 +48,9 @@ export const env = {
   SMTP_TIMEOUT_MS: Number(process.env.SMTP_TIMEOUT_MS || 5000),
   MAIL_FROM: process.env.MAIL_FROM || "Pomegranate Technology <no-reply@pomotech.in>",
   ADMIN_EMAIL: process.env.ADMIN_EMAIL || "admin@pomotech.in",
+  RESEND_API_KEY: process.env.RESEND_API_KEY || "",
+  RESEND_FROM: process.env.RESEND_FROM || process.env.MAIL_FROM || "Pomegranate Technology <onboarding@resend.dev>",
+  RESEND_API_URL: process.env.RESEND_API_URL || "https://api.resend.com/emails",
   WHATSAPP_PHONE: process.env.WHATSAPP_PHONE || "919875294387",
   RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY || "",
   RECAPTCHA_VERIFY_URL: process.env.RECAPTCHA_VERIFY_URL || "https://www.google.com/recaptcha/api/siteverify"

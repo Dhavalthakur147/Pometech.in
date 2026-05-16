@@ -9,15 +9,50 @@ function getMailFrom() {
   return env.MAIL_FROM;
 }
 
-export async function sendEmail({ to, subject, html, text, replyTo }) {
-  if (!mailer) {
-    logger.warn(`Email skipped because SMTP_HOST is not configured: ${subject}`);
-    return { skipped: true };
-  }
+async function sendWithResend({ to, subject, html, text, replyTo }) {
+  const response = await fetch(env.RESEND_API_URL, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      from: env.RESEND_FROM,
+      to: Array.isArray(to) ? to : [to],
+      subject,
+      html,
+      text,
+      reply_to: replyTo
+    })
+  });
 
+  const result = await response.json().catch(() => ({}));
+  if (!response.ok) {
+    throw new Error(result.message || `Resend API failed with status ${response.status}`);
+  }
+  return { messageId: result.id, provider: "resend" };
+}
+
+export async function sendEmail({ to, subject, html, text, replyTo }) {
   if (!to || (Array.isArray(to) && !to.length)) {
     logger.warn(`Email skipped because no recipient is configured: ${subject}`);
     return { skipped: true, reason: "missing-recipient" };
+  }
+
+  if (env.RESEND_API_KEY) {
+    try {
+      const result = await sendWithResend({ to, subject, html, text, replyTo });
+      logger.info(`Email sent with Resend: ${subject} (${result.messageId || "no-message-id"})`);
+      return result;
+    } catch (error) {
+      logger.error(`Resend email failed: ${error.message}`);
+      throw error;
+    }
+  }
+
+  if (!mailer) {
+    logger.warn(`Email skipped because SMTP_HOST is not configured: ${subject}`);
+    return { skipped: true };
   }
 
   try {
