@@ -2,6 +2,8 @@ import { createCrudController } from "./crudController.js";
 import { createModel } from "../models/baseModel.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { notifyAdminOfContact, sendEmail } from "../services/emailService.js";
+import { verifyRecaptcha } from "../services/recaptchaService.js";
+import { ApiError } from "../utils/apiError.js";
 import { logger } from "../utils/logger.js";
 
 const messageModel = createModel("messages", ["name", "email", "phone", "Service", "message"]);
@@ -11,7 +13,7 @@ export const listMessages = crud.list;
 export const deleteMessage = crud.remove;
 
 async function processContactLead(lead) {
-  const { service, ...databaseLead } = lead;
+  const { service, website, startedAt, recaptchaToken, ...databaseLead } = lead;
   const savedLead = {
     ...databaseLead,
     message: service && !databaseLead.message.toLowerCase().includes("service:")
@@ -41,6 +43,21 @@ async function processContactLead(lead) {
 
 export const saveContactForm = asyncHandler(async (req, res) => {
   const lead = { ...req.body, status: "unread" };
+
+  if (lead.website) {
+    throw new ApiError(400, "Unable to receive enquiry right now. Please try again.");
+  }
+
+  if (lead.startedAt && Date.now() - Number(lead.startedAt) < 2000) {
+    throw new ApiError(400, "Please review the form and submit again.");
+  }
+
+  const captcha = await verifyRecaptcha(lead.recaptchaToken, req.ip);
+  if (!captcha.success) {
+    logger.warn(`Contact lead blocked by reCAPTCHA: ${captcha.reason || captcha.errors?.join(",") || "failed"}`);
+    throw new ApiError(400, "Please complete the security check and try again.");
+  }
+
   const result = await processContactLead(lead);
 
   if (!result.emailSent && !result.saved) {

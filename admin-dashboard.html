@@ -7,7 +7,11 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Simple Pomegranate Technology admin panel for website content, services, portfolio, demo work, leads, and admins.">
   <title>Admin Dashboard | Pomegranate Technology</title>
-  <link rel="icon" href="image/logo.jpeg">
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="manifest" href="/site.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,7 +22,7 @@
 
   <aside class="admin-sidebar" data-sidebar>
     <a class="admin-brand" href="admin-dashboard.html">
-      <img decoding="async" src="image/logo.jpeg" alt="Pomegranate Technology logo">
+      <img decoding="async" src="image/logo.webp" width="1241" height="1006" alt="Pomegranate Technology logo">
       <span>Pomegranate Admin</span>
     </a>
     <nav class="admin-menu" aria-label="Admin menu">
@@ -106,7 +110,7 @@
               <label>Service Name<input name="title" placeholder="Website Development" required></label>
               <label>Price<input name="price" type="number" min="0" step="1" placeholder="2999"></label>
               <label>Icon<input name="icon" placeholder="WD"></label>
-              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Image URL<input name="image" placeholder="image/logo.webp"></label>
               <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-service-image-input></label>
               <label>Description<textarea name="description" rows="4" placeholder="Service details" required></textarea></label>
               <p class="login-error" data-service-status></p>
@@ -129,7 +133,7 @@
               <input type="hidden" name="id">
               <label>Title<input name="title" placeholder="Project title" required></label>
               <label>Category<select name="category" required><option value="">Select Category</option><option>Social Media Posts</option><option>Website Designs</option><option>App UI</option><option>Business Posters</option><option>Excel Dashboards</option><option>Logo Designs</option><option>Festival Posters</option><option>Brochure Designs</option></select></label>
-              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Image URL<input name="image" placeholder="image/logo.webp"></label>
               <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-portfolio-image-input></label>
               <label>Description<textarea name="description" rows="4" placeholder="Project details"></textarea></label>
               <p class="login-error" data-portfolio-status></p>
@@ -152,7 +156,7 @@
               <input type="hidden" name="id">
               <label>Title<input name="title" placeholder="Restaurant Website Demo" required></label>
               <label>Category<select name="category" required><option value="">Select Category</option><option>Website Demo</option><option>Logo Demo</option><option>Poster Demo</option><option>Dashboard Demo</option><option>App UI Demo</option><option>Automation Demo</option></select></label>
-              <label>Image URL<input name="image" placeholder="image/logo.jpeg"></label>
+              <label>Image URL<input name="image" placeholder="image/logo.webp"></label>
               <label>Import Image<input type="file" name="imageFile" accept="image/jpeg,image/png,image/webp,image/gif" data-demo-work-image-input></label>
               <label>Demo Link<input name="link" placeholder="https://example.com"></label>
               <label>Description<textarea name="description" rows="4" placeholder="Demo work details"></textarea></label>

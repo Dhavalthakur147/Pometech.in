@@ -182,7 +182,7 @@ async function loadPortfolioGrid() {
       const image = document.createElement("img");
       image.decoding = "async";
       image.loading = "lazy";
-      image.src = item.image || "image/logo.jpeg";
+      image.src = item.image || "image/logo.webp";
       image.alt = `${item.title || item.category || "Portfolio"} portfolio`;
 
       const body = document.createElement("div");
@@ -222,7 +222,7 @@ async function loadDemoWorkGrid() {
       const image = document.createElement("img");
       image.decoding = "async";
       image.loading = "lazy";
-      image.src = item.image || "image/logo.jpeg";
+      image.src = item.image || "image/logo.webp";
       image.alt = `${item.title || "Demo work"} sample`;
 
       const body = document.createElement("div");
@@ -342,6 +342,28 @@ revealItems.forEach((item, index) => {
 });
 
 if (contactForm) {
+  const startedAt = contactForm.querySelector("[data-started-at]");
+  const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey?.trim() || "";
+  const recaptchaTarget = contactForm.querySelector("[data-recaptcha]");
+  let recaptchaWidgetId = null;
+
+  if (startedAt) startedAt.value = String(Date.now());
+
+  if (recaptchaSiteKey && recaptchaTarget) {
+    window.pomotechRenderCaptcha = () => {
+      if (!window.grecaptcha || recaptchaWidgetId !== null) return;
+      recaptchaWidgetId = window.grecaptcha.render(recaptchaTarget, {
+        sitekey: recaptchaSiteKey
+      });
+    };
+
+    const script = document.createElement("script");
+    script.src = "https://www.google.com/recaptcha/api.js?onload=pomotechRenderCaptcha&render=explicit";
+    script.async = true;
+    script.defer = true;
+    document.head.append(script);
+  }
+
   contactForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -356,10 +378,17 @@ if (contactForm) {
       phone: String(form.get("phone") || "").trim(),
       email: String(form.get("email") || "").trim(),
       service: String(form.get("service") || "").trim(),
+      website: String(form.get("website") || "").trim(),
+      startedAt: Number(form.get("startedAt") || Date.now()),
+      recaptchaToken: String(form.get("g-recaptcha-response") || "").trim(),
       message: `Service: ${service}\n\n${message || "Please contact me about this service."}`
     };
 
     try {
+      if (recaptchaSiteKey && !payload.recaptchaToken) {
+        throw new Error("Please complete the security check.");
+      }
+
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = "Sending...";
@@ -377,11 +406,14 @@ if (contactForm) {
       }
 
       contactForm.reset();
+      if (startedAt) startedAt.value = String(Date.now());
+      if (window.grecaptcha && recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId);
       if (submitButton) submitButton.textContent = "Enquiry Sent";
       setTimeout(() => {
         if (submitButton) submitButton.textContent = originalText;
       }, 1800);
     } catch (error) {
+      if (window.grecaptcha && recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId);
       if (submitButton) submitButton.textContent = error.message || "Try Again";
       setTimeout(() => {
         if (submitButton) submitButton.textContent = originalText;

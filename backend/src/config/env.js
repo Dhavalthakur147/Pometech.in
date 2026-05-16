@@ -48,5 +48,7 @@ export const env = {
   SMTP_TIMEOUT_MS: Number(process.env.SMTP_TIMEOUT_MS || 10000),
   MAIL_FROM: process.env.MAIL_FROM || "Pomegranate Technology <no-reply@pomotech.in>",
   ADMIN_EMAIL: process.env.ADMIN_EMAIL || "admin@pomotech.in",
-  WHATSAPP_PHONE: process.env.WHATSAPP_PHONE || "919875294387"
+  WHATSAPP_PHONE: process.env.WHATSAPP_PHONE || "919875294387",
+  RECAPTCHA_SECRET_KEY: process.env.RECAPTCHA_SECRET_KEY || "",
+  RECAPTCHA_VERIFY_URL: process.env.RECAPTCHA_VERIFY_URL || "https://www.google.com/recaptcha/api/siteverify"
 };

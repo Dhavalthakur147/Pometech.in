@@ -69,6 +69,9 @@ export const messageSchema = z.object({
     email: optionalEmail,
     phone: optionalText,
     service: optionalText,
+    website: optionalText,
+    startedAt: z.coerce.number().optional().nullable(),
+    recaptchaToken: optionalText,
     message: z.string().min(5)
   })
 });
