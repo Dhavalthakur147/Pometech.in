@@ -421,6 +421,7 @@ if (contactForm) {
   const startedAt = contactForm.querySelector("[data-started-at]");
   const recaptchaSiteKey = contactForm.dataset.recaptchaSiteKey?.trim() || "";
   const recaptchaTarget = contactForm.querySelector("[data-recaptcha]");
+  const contactStatus = contactForm.querySelector("[data-contact-status]");
   let recaptchaWidgetId = null;
 
   if (startedAt) startedAt.value = String(Date.now());
@@ -459,8 +460,22 @@ if (contactForm) {
       recaptchaToken: String(form.get("g-recaptcha-response") || "").trim(),
       message: `Service: ${service}\n\n${message || "Please contact me about this service."}`
     };
+    const whatsappText = [
+      "New Website Enquiry",
+      `Name: ${payload.name}`,
+      `Phone: ${payload.phone}`,
+      `Email: ${payload.email || "N/A"}`,
+      `Service: ${payload.service || "N/A"}`,
+      `Message: ${message || "Please contact me about this service."}`
+    ].join("\n");
+    const whatsappFallbackUrl = `https://wa.me/919875294387?text=${encodeURIComponent(whatsappText)}`;
 
     try {
+      if (contactStatus) {
+        contactStatus.textContent = "";
+        contactStatus.classList.remove("error");
+      }
+
       if (recaptchaSiteKey && !payload.recaptchaToken) {
         throw new Error("Please complete the security check.");
       }
@@ -484,12 +499,18 @@ if (contactForm) {
       contactForm.reset();
       if (startedAt) startedAt.value = String(Date.now());
       if (window.grecaptcha && recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId);
+      if (contactStatus) contactStatus.textContent = result.message || "Enquiry sent successfully.";
       if (submitButton) submitButton.textContent = "Enquiry Sent";
       setTimeout(() => {
         if (submitButton) submitButton.textContent = originalText;
       }, 1800);
     } catch (error) {
       if (window.grecaptcha && recaptchaWidgetId !== null) window.grecaptcha.reset(recaptchaWidgetId);
+      if (contactStatus) {
+        contactStatus.textContent = "Form is not sending right now. Opening WhatsApp with your details.";
+        contactStatus.classList.add("error");
+      }
+      window.open(whatsappFallbackUrl, "_blank", "noopener");
       if (submitButton) submitButton.textContent = error.message || "Try Again";
       setTimeout(() => {
         if (submitButton) submitButton.textContent = originalText;

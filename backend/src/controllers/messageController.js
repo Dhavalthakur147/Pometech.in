@@ -13,7 +13,7 @@ export const listMessages = crud.list;
 export const deleteMessage = crud.remove;
 
 async function processContactLead(lead) {
-  const { service, website, startedAt, recaptchaToken, ...databaseLead } = lead;
+  const { service, website, startedAt, recaptchaToken, status, ...databaseLead } = lead;
   const savedLead = {
     ...databaseLead,
     message: service && !databaseLead.message.toLowerCase().includes("service:")
