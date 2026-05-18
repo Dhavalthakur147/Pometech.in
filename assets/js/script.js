@@ -11,6 +11,7 @@ const estimateForm = document.querySelector("[data-estimate-form]");
 const estimateTotal = document.querySelector("[data-estimate-total]");
 const languageToggle = document.querySelector("[data-language-toggle]");
 const languageKey = "pomotech-language";
+const isTouchDevice = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
 let deferredInstallPrompt = null;
 
 function isStandaloneApp() {
@@ -400,22 +401,26 @@ const updateHeader = () => {
 window.addEventListener("scroll", updateHeader, { passive: true });
 updateHeader();
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  { threshold: 0.12 }
-);
+if (isTouchDevice || !("IntersectionObserver" in window)) {
+  revealItems.forEach((item) => item.classList.add("visible"));
+} else {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.12 }
+  );
 
-revealItems.forEach((item, index) => {
-  item.style.transitionDelay = `${Math.min(index * 45, 260)}ms`;
-  observer.observe(item);
-});
+  revealItems.forEach((item, index) => {
+    item.style.transitionDelay = `${Math.min(index * 45, 260)}ms`;
+    observer.observe(item);
+  });
+}
 
 if (contactForm) {
   const startedAt = contactForm.querySelector("[data-started-at]");
