@@ -2275,6 +2275,49 @@ h1 {
     padding: 58px 0;
   }
 
+  .choose-panel {
+    padding: 22px 16px;
+  }
+
+  .choose-panel::after {
+    display: none;
+  }
+
+  .choose-panel .section-copy h2 {
+    margin-bottom: 14px;
+    font-size: clamp(1.6rem, 7vw, 2rem);
+  }
+
+  .choose-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .choose-item {
+    min-height: 82px;
+    gap: 8px;
+    padding: 14px;
+    font-size: 0.9rem;
+  }
+
+  .choose-item span {
+    font-size: 0.74rem;
+  }
+
+  .cta-band {
+    gap: 18px;
+    padding: 22px 16px;
+  }
+
+  .cta-band h2 {
+    margin-bottom: 0;
+    font-size: clamp(1.55rem, 7vw, 2rem);
+  }
+
+  .cta-band .eyebrow {
+    margin-bottom: 8px;
+  }
+
   .stats,
   .trust-strip,
   .about-platform,
@@ -2300,6 +2343,10 @@ h1 {
   .gallery,
   .site-footer {
     grid-template-columns: 1fr;
+  }
+
+  .choose-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .growth-graphic {
@@ -2382,5 +2429,83 @@ h1 {
 
   .install-app-actions button {
     flex: 1;
+  }
+}
+
+@media (max-width: 640px), (hover: none) and (pointer: coarse) {
+  body {
+    text-rendering: auto;
+  }
+
+  .site-header,
+  .trust-card,
+  .platform-card,
+  .estimate-results,
+  .estimate-form,
+  .transform-card,
+  .faq-list details,
+  .stat,
+  .feature-card,
+  .service-card,
+  .contact-panel,
+  .contact-form,
+  .more-service-card,
+  .pricing-card,
+  .portfolio-tile,
+  .impact-card,
+  .testimonial-card,
+  .team-card,
+  .timeline-item,
+  .dark-panel,
+  .offer-card,
+  .cta-band,
+  .site-footer,
+  .growth-graphic {
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+    backdrop-filter: none;
+  }
+
+  .hero-graphic img,
+  .tech-orbit,
+  .profile-logo,
+  .service-icon,
+  .more-service-card .service-icon,
+  .growth-node {
+    animation: none;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn,
+  .feature-card,
+  .service-card,
+  .service-pill,
+  .choose-item,
+  .team-card,
+  .more-service-card,
+  .pricing-card,
+  .portfolio-tile,
+  .impact-card,
+  .testimonial-card {
+    transition: none;
+  }
+
+  .btn:hover,
+  .feature-card:hover,
+  .service-card:hover,
+  .service-pill:hover,
+  .choose-item:hover,
+  .team-card:hover,
+  .more-service-card:hover,
+  .pricing-card:hover,
+  .portfolio-tile:hover,
+  .impact-card:hover,
+  .testimonial-card:hover {
+    transform: none;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
   }
 }
